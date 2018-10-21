@@ -4,30 +4,22 @@ import Layout from "../../components/layout"
 import styles from "./index.module.css"
 
 export default ({ data }) => {
+  let nodes = data.allMarkdownRemark.edges.map( edge => edge.node )
   return (
     <Layout>
       <div>
-        <h1>My Site's Files</h1>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>relativePath</th>
-              <th>prettySize</th>
-              <th>extension</th>
-              <th>birthTime</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.allFile.edges.map(({ node }, index) => (
-              <tr key={index}>
-                <td>{node.relativePath}</td>
-                <td>{node.prettySize}</td>
-                <td>{node.extension}</td>
-                <td>{node.birthTime}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <h1>My Blog posts</h1>
+        <div className={styles.blogList}>
+          {
+            nodes.map( (node) => (
+              <div key={node.id}>
+                <h2 className={styles.blogPostTitle}> {node.frontmatter.title} </h2> 
+                <span className={styles.blogPostDate}> {node.frontmatter.date}</span>
+                <p>{node.excerpt}</p>
+              </div>
+            ))
+          }
+        </div>
       </div>
     </Layout>
   )
@@ -35,13 +27,16 @@ export default ({ data }) => {
 
 export const query = graphql`
   query {
-    allFile {
+    allMarkdownRemark {
+      totalCount
       edges {
         node {
-          relativePath
-          prettySize
-          extension
-          birthTime(fromNow: true)
+          id
+          frontmatter {
+            title
+            date(formatString: "DD MMMM, YYYY")
+          }
+          excerpt
         }
       }
     }

@@ -1,0 +1,31 @@
+.header{
+    max-width: 960px;
+    margin: auto;
+    border-bottom: 2px solid black;
+}
+
+.header h1{
+    display: inline-block;
+}
+
+.header h1 a{
+    text-decoration: none;
+    color: blue;
+}
+
+.nav{
+    padding: 10px;
+    max-width: 700px;
+    margin: auto;
+    background: aliceblue;
+    float: right;
+    margin-top: 1.5em;
+  }
+
+.nav a{
+    margin-right: 15px;
+}
+
+.nav a:last-child{
+    margin-right: 0px;
+}

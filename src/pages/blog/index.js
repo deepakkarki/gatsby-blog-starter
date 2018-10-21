@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import Layout from "../../components/layout"
 import styles from "./index.module.css"
 
@@ -13,7 +13,7 @@ export default ({ data }) => {
           {
             nodes.map( (node) => (
               <div key={node.id}>
-                <h2 className={styles.blogPostTitle}> {node.frontmatter.title} </h2> 
+                <h2 className={styles.blogPostTitle}> <Link to={node.fields.slug}>{node.frontmatter.title}</Link> </h2> 
                 <span className={styles.blogPostDate}> {node.frontmatter.date}</span>
                 <p>{node.excerpt}</p>
               </div>
@@ -32,6 +32,9 @@ export const query = graphql`
       edges {
         node {
           id
+          fields{
+            slug
+          }
           frontmatter {
             title
             date(formatString: "DD MMMM, YYYY")

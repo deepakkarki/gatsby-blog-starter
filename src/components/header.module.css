@@ -19,11 +19,13 @@
     margin: auto;
     background: aliceblue;
     float: right;
-    margin-top: 1.5em;
+    margin-top: 1.2em;
   }
 
 .nav a{
-    margin-right: 15px;
+    margin-right: 20px;
+    font-size: 18px;
+    color: black;
 }
 
 .nav a:last-child{

@@ -10,11 +10,11 @@ const Header = ({ siteTitle }) => (
       </Link>
     </h1>
     <nav className={headerStyles.nav}>
-      <Link to="/">
-        Home
-      </Link>
       <Link to="/about">
-        About
+        <b>About</b>
+      </Link>
+      <Link to="/blog">
+        <b>Blog</b>
       </Link>
     </nav>
   </header>

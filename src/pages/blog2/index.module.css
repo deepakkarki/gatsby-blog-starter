@@ -1,0 +1,12 @@
+.blogList{
+    padding: 15px;
+    margin-bottom: 25px;
+}
+
+.blogPostTitle{
+    margin-bottom: 5px;
+}
+
+.blogPostDate{
+    color: grey;
+}

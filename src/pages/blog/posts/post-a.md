@@ -1,6 +1,7 @@
 ---
 title: "Post A"
 date: "2018-10-10"
+published: true
 ---
 
 This is **post** A.

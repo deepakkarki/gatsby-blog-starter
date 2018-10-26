@@ -1,5 +1,8 @@
 const { createFilePath } = require(`gatsby-source-filesystem`)
 const path = require(`path`)
+const {siteMetadata} = require('./gatsby-config.js')
+
+let BC = siteMetadata.blogConfig
 
 /**
 
@@ -40,6 +43,16 @@ const path = require(`path`)
  - https://using-remark.gatsbyjs.org/custom-components/ (look at the caveats)
  - https://prestonrichey.com/blog/react-in-markdown/ (look at <hidden/>)
 
+ Each markdown page will contain the type and layout.
+  * type => page or post or meta. Files marked as post appear in the stream
+            meta files are index.md's that are used for pagination metadata
+  * layout => which ever template is to be applied
+  * render => True or False. True by default. If false, not rendered
+    by the general markdownRemark processing `generateFromMD()`
+    Think of this as data to be consumed while rendering index pages 
+    of blog posts, series and categories - not rendered standalone.
+  * published => True or False.
+
 
  Collections (TODO)
  ===========
@@ -54,10 +67,12 @@ const path = require(`path`)
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
 
-  /**
+  /*
+
    Need to add some more metadata to the nodes so querying becomes easier.
-   (maybe fileType - page or post, sub-blog name, etc)
-   */
+   (maybe fileType - page or post, blog name, etc)
+
+  */
 
   if (node.internal.type === `MarkdownRemark`) {
     // as of now the slug mirrors the filesystem, but ideally I should pick this up 
@@ -73,11 +88,15 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 
 
 /*
+
  Page Creation
  =============
 
  So now this should mirror the output of the URLs I expect.
- * /blog/ - create the index page. => auto since it's .js files.
+ * all posts - do the standard markdown remark processing for all .md nodes.
+
+ * /blog/ - create the index page. => auto since it's .js files. (better have js
+    files rather than template, as you can customise the UI per sub-blog)
     this will have to do the query for posts, pages, series, collection itself.
  * /blog/(page) - like /about, /contact and stuff - this should be done via the
     standard markdown remark rendering I will be doing.
@@ -105,12 +124,32 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   processing. So unless I deal with this somehow during 'onCreateNode', this will be a mess.
   Other alternative is that I can have this in the site metadata.
 
+  Never mind, this "blog/categories/systems/index.md" file just needs to mark 
+  "render : false" in it's frontmatter. See "MarkDown" section in the top comment.
 
 */
 
 exports.createPages = ({ graphql, actions }) => {
-  return generateFromMD(graphql, actions.createPage)
+
+  let createPage = actions.createPage
+  // Standard processing of markdownRemark nodes
+  let p1 = generateFromMD(graphql, createPage)
+  // return p1
+  
+  // generate paginated blog index. "blog/posts/[n]"
+  let p2 = generateBlogPostsIndex(graphql, createPage)
+  return Promise.all([p1, p2])
+
+  // paginated post index for each series. "blog/series/sname/[n]"
+  let p3 = generateSeriesPostsIndex(graphql, createPage)
+
+  // paginated post index for each category. "/blog/categories/cname/[n]"
+  let p4 = generateCategoryPostsIndex(graphql, createPage)
+
+  return Promise.all([p1, p2, p3, p4])
 }
+
+
 
 function generateFromMD(graphql, createPage){
   return graphql(`
@@ -118,6 +157,11 @@ function generateFromMD(graphql, createPage){
         allMarkdownRemark {
           edges {
             node {
+              frontmatter{
+                layout
+                published
+                render
+              }
               fields {
                 slug
               }
@@ -127,17 +171,148 @@ function generateFromMD(graphql, createPage){
       }
     `).then(result => {
       result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-        let layout = node.frontmatter.layout || 'blog-post.js'
+        let fm = node.frontmatter || {}
+        let layout = fm.layout || 'blog-post.js'
+
+        // Filter this in the graphql query itself
+        if(fm.published && (fm.render != false)){
+          createPage({
+            path: node.fields.slug,
+            component: path.resolve(`./src/templates/${layout}`),
+            context: {
+              slug: node.fields.slug,
+            },
+          })
+        }
+      })
+    })
+}
+
+
+/*
+  blog/index.js auto generates /blog/. This function generates "/blog/posts/[n]"
+  for each blog (defined in gatsby-config.siteMetadata)
+*/
+function generateBlogPostsIndex(graphql, createPage){
+
+  //Query the siteMetadata for the blogs, For each blog -
+  let prArray = [] //the promise array
+  BC.forEach((blog) =>{
+    // query all the markdown in it's children folder with -
+    // render!=false, publish=true, type=post
+
+    //RegEx cant end without '/', it interprets "blog" as a flag
+    // like \foo.bar/g\ where 'g' is the flag
+    // Never mind, it needs 2 "/" at the end. Sigh. :'(
+    let blogPath = `${__dirname}/src/pages/${blog.path}/`
+    let filePath = `${blogPath}posts/index.md`
+
+    let task = graphql(`
+      {
+        allMarkdownRemark(
+          filter: {
+            fileAbsolutePath: {regex: "${blogPath}/"}
+            frontmatter:{
+              render: {ne : false}
+              published: {eq : true}
+              type: {ne: "page"}
+            }
+          }
+        ){
+          totalCount
+        }
+
+        markdownRemark(
+          fileAbsolutePath :{eq:"${filePath}"}
+        ){
+          id
+          frontmatter {
+            layout
+            postsPerPage
+          }
+          fields{
+            slug
+          }
+        }
+      }
+    `)
+    .then(result => {
+      let {allMarkdownRemark, markdownRemark} = result.data
+      let layout = markdownRemark.frontmatter.layout || "blog-posts-index.js"
+      let postsPerPage = markdownRemark.frontmatter.postsPerPage || 3
+      let numPages = Math.ceil(allMarkdownRemark.totalCount/ postsPerPage)
+      let slug = markdownRemark.fields.slug
+
+      Array.from({ length: numPages }).forEach((_, i) => {
         createPage({
-          path: node.fields.slug,
+          path: i === 0 ? slug : `${slug}${i + 1}`,
           component: path.resolve(`./src/templates/${layout}`),
           context: {
-            slug: node.fields.slug,
+            limit: postsPerPage,
+            skip: i * postsPerPage,
+            blogPath: blogPath+'/', //apparently you need this :( or it matches 'blog' and 'blog2'
+            filePath
           },
         })
       })
     })
+
+    prArray.push(task)
+  })
+
+  return Promise.all(prArray)
+
 }
+
+
+/*
+  series/index.js auto generates /blog/series/. This function generates
+  "/blog/series/sname/[n]" for each blog (defined in siteMetadata)
+*/
+function generateSeriesPostsIndex(graphql, createPage){
+
+//Query the siteMetadata for the blogs, For each blog -
+
+  //  query all the markdown in it's blog/series folder
+  //    with render!=false, publish=true, type=post
+  //    sort the post by date
+  //  output : list of series with children (posts in each series).
+  //    similar to series/index.js
+
+  //  query for the blog/series/sname/index.md - get it's content, frontmatter
+  //    (perhaps use posts per page, etc from here?)
+
+  //  For each series of the current sub-blog
+  //    Figure out how many pages there should be, generate the pages
+  //    in a loop using (frontmatter.layout || "template/series-posts-index.js")
+  //    
+
+}
+
+/*
+  caregories/index.js auto generates /blog/series/. This function generates
+  "/blog/categories/cname/[n]" for each blog (defined in siteMetadata)
+*/
+function generateCategoryPostsIndex(graphql, createPage){
+
+//Query the siteMetadata for the blogs, and for each blog -
+
+  //  query all the markdown files in the sub folders
+  //    with render!=false, publish=true, type=post
+  //    sort the post by date
+  //  output : list of categories in the current blog with their children.
+  //    similar to categories/index.js (?)
+
+  //  query for the blog/categories/cname/index.md - get it's content, frontmatter
+  //    Shoud this even EXIST?
+
+  //  For each series of the current sub-blog
+  //    Figure out how many pages there should be, generate the pages in a loop
+  //    using (frontmatter.layout || "template/categories-posts-index.js")
+  //    
+
+}
+
 
 
 /*

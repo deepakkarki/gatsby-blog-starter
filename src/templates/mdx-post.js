@@ -26,6 +26,7 @@ export default ({ data }) => {
   )
 }
 
+/*
 export const pageQuery = graphql`
   query($slug: String!) {
     mdx(fields: { slug: { eq: $slug } }) {
@@ -38,3 +39,4 @@ export const pageQuery = graphql`
     }
   }
 `
+*/

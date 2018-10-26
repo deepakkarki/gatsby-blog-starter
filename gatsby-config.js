@@ -9,12 +9,13 @@ module.exports = {
     },
     blogConfig: [
       {
-        name : "blog-1",
-        otherDetails: "TBD"
+        name : "blog #1",
+        //relative to "/src/pages/"
+        path: "blog"
       },
       {
-        name : "blog-2",
-        otherDetails: "TBD"
+        name : "blog #2",
+        path: "blog2"
       }
     ],
   },

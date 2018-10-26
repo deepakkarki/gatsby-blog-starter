@@ -1,19 +1,16 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import Layout from "../../components/layout"
-import styles from "./index.module.css"
+import Layout from "../components/layout"
+import styles from "./blog-posts-index.module.css"
 
 export default ({ data }) => {
   let nodes = data.allMarkdownRemark.edges.map( edge => edge.node )
-  console.log(nodes)
+  const index = data.markdownRemark
   return (
     <Layout>
       <div>
-        <h1>My Blog posts</h1>
-        <Link to="/blog/posts">See all posts</Link> <br/><br/>
-        <Link to="/blog/series">See all series</Link> <br/><br/>
-        <Link to="/blog/categories">See all categories</Link><br/><br/>
-
+        <h1>{index.frontmatter.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: index.html }} />
         <div className={styles.blogList}>
           {
             nodes.map( (node) => (
@@ -25,29 +22,33 @@ export default ({ data }) => {
             ))
           }
         </div>
+        {/* Do the pagination links over here */}
       </div>
     </Layout>
   )
 }
 
-export const query = graphql`
-  query {
-    allMarkdownRemark (
+export const blogListQuery = graphql`
+  query blogListQuery($skip: Int!, $limit: Int!, $blogPath: String!, $filePath: String!) {
+
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: $limit
+      skip: $skip
       filter: {
-        fileAbsolutePath: {regex: "pages/blog//"}
+        fileAbsolutePath: {regex: $blogPath},
         frontmatter:{
-          render: {ne : false}
-          published: {eq : true}
+          render: {ne : false},
+          published: {eq : true},
           type: {ne: "page"}
         }
       }
-    ){
-      totalCount
+    ) {
       edges {
         node {
           id
           fields{
-            slug
+              slug
           }
           frontmatter {
             title
@@ -57,5 +58,20 @@ export const query = graphql`
         }
       }
     }
+
+    markdownRemark(
+        fileAbsolutePath :{eq: $filePath}
+      ){
+        id
+        html
+        frontmatter {
+          title
+          layout
+          postsPerPage
+        }
+        fields{
+          slug
+        }
+      }
   }
 `

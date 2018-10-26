@@ -6,7 +6,17 @@ module.exports = {
       home : "/",
       blog : "/blog/",
       about : "/about/"
-    }
+    },
+    blogConfig: [
+      {
+        name : "blog-1",
+        otherDetails: "TBD"
+      },
+      {
+        name : "blog-2",
+        otherDetails: "TBD"
+      }
+    ],
   },
 
   plugins: [

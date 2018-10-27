@@ -1,6 +1,7 @@
 const { createFilePath } = require(`gatsby-source-filesystem`)
 const path = require(`path`)
 const {siteMetadata} = require('./gatsby-config.js')
+var slugify = require('slugify')
 
 let BC = siteMetadata.blogConfig
 
@@ -142,7 +143,7 @@ exports.createPages = ({ graphql, actions }) => {
 
   // paginated post index for each series. "blog/series/sname/[n]"
   let p3 = generateSeriesPostsIndex(graphql, createPage)
-  return Promise.all([p1, p2, p3])
+  //return Promise.all([p1, p2, p3])
 
   // paginated post index for each category. "/blog/categories/cname/[n]"
   let p4 = generateCategoryPostsIndex(graphql, createPage)
@@ -399,7 +400,7 @@ function generateSeriesPostsIndex(graphql, createPage){
         let {allMarkdownRemark, markdownRemark={frontmatter:{}}} = result.data
         let sname = seriesList[i]
         if(!markdownRemark || !allMarkdownRemark){
-            console.warn(`Series page not being generated for ${blog}/series/${sname}`)
+            console.warn(`Series page not being generated for ${blog.path}/series/${sname}`)
             console.warn(`Most likely due to missing index.md page`)
            return;
         } 
@@ -439,6 +440,59 @@ function generateSeriesPostsIndex(graphql, createPage){
   "/blog/categories/cname/[n]" for each blog (defined in siteMetadata)
 */
 function generateCategoryPostsIndex(graphql, createPage){
+
+  let prArray = [] //the promise array
+  BC.forEach((blog) =>{
+    let blogPath = `${__dirname}/src/pages/${blog.path}/`
+    let filePath = `${blogPath}categories/index.md`
+
+    let task = graphql(`
+      {
+        allMarkdownRemark(
+          filter: {
+            fileAbsolutePath: {regex: "${blogPath}/"}
+            frontmatter:{
+              render: {ne : false}
+              published: {eq : true}
+              type: {ne: "page"}
+            }
+          }
+        ){
+          group(field:frontmatter___categories){
+            totalCount
+            fieldValue
+          }
+        }
+      }
+    `)
+    .then(result => {
+      let categories = result.data.allMarkdownRemark.group
+      let layout = "category-posts-index.js"
+      let postsPerPage = 3
+
+      categories.forEach(category => { //paginate each category
+        let slug = `/${blog.path}/categories/${slugify(category.fieldValue)}/`
+        let numPages = Math.ceil(category.totalCount/ postsPerPage)
+        Array.from({ length: numPages }).forEach((_, i) => {
+          createPage({
+            path: i === 0 ? slug : `${slug}${i + 1}`,
+            component: path.resolve(`./src/templates/${layout}`),
+            context: {
+              limit: postsPerPage,
+              skip: i * postsPerPage,
+              blogPath: blogPath+'/',
+              category: category.fieldValue
+            },
+          })
+        })
+      })
+
+    })
+
+    prArray.push(task)
+  })
+
+  return Promise.all(prArray)
 
 //Query the siteMetadata for the blogs, and for each blog -
 

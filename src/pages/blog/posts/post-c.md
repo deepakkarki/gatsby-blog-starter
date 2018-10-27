@@ -3,6 +3,9 @@ title: "Post C"
 date: "2018-10-12"
 published: true
 render: false
+categories:
+  - ML
+  - systems
 ---
 
 This is **post** C.

@@ -2,6 +2,9 @@
 title: "Post A"
 date: "2018-10-10"
 published: true
+categories:
+  - python
+  - systems
 ---
 
 This is **post** A.

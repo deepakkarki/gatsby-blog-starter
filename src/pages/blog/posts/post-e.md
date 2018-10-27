@@ -1,6 +1,10 @@
 ---
 title: "Post E"
 date: "2018-10-10"
+published: true
+categories:
+  - python
+  - javascript
 ---
 
 This is **post** E.

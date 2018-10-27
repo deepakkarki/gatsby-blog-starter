@@ -1,6 +1,11 @@
 ---
 title: "Post D"
 date: "2018-10-10"
+published: true
+categories:
+  - javascript
+  - react
+  - data science
 ---
 
 This is **post** D.

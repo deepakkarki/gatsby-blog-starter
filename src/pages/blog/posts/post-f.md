@@ -1,6 +1,9 @@
 ---
 title: "Post F"
 date: "2018-10-10"
+categories:
+  - javascript
+  - vue
 ---
 
 This is **post** F.

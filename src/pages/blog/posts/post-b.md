@@ -2,6 +2,9 @@
 title: "Post B"
 date: "2018-10-11"
 published: true
+categories:
+  - javascript
+  - systems
 ---
 
 This is **post** B.

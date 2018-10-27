@@ -1,10 +1,10 @@
 ---
-title: "Post D"
-date: "2018-10-15"
+title: "Post B"
+date: "2018-10-11"
 published: true
 ---
 
-This is **post** D.
+This is **post** B.
 
 ```python
 def foo():
@@ -13,7 +13,7 @@ def foo():
     print "foo"
 ```
 
-> This is post D.
+> This is post B.
 
-`This is post D.`
+`This is post B.`
 

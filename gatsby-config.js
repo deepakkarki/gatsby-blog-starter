@@ -11,7 +11,14 @@ module.exports = {
       {
         name : "blog #1",
         //relative to "/src/pages/"
-        path: "blog"
+        path: "blog",
+
+        //apparently gatsby *sucks* at querying filesystem
+        // so need to list the series myself
+        series:[
+          "js30",
+          "jsFoo"
+        ]
       },
       {
         name : "blog #2",

@@ -138,10 +138,11 @@ exports.createPages = ({ graphql, actions }) => {
   
   // generate paginated blog index. "blog/posts/[n]"
   let p2 = generateBlogPostsIndex(graphql, createPage)
-  return Promise.all([p1, p2])
+  //return Promise.all([p1, p2])
 
   // paginated post index for each series. "blog/series/sname/[n]"
   let p3 = generateSeriesPostsIndex(graphql, createPage)
+  return Promise.all([p1, p2, p3])
 
   // paginated post index for each category. "/blog/categories/cname/[n]"
   let p4 = generateCategoryPostsIndex(graphql, createPage)
@@ -201,9 +202,11 @@ function generateBlogPostsIndex(graphql, createPage){
     // query all the markdown in it's children folder with -
     // render!=false, publish=true, type=post
 
-    //RegEx cant end without '/', it interprets "blog" as a flag
-    // like \foo.bar/g\ where 'g' is the flag
-    // Never mind, it needs 2 "/" at the end. Sigh. :'(
+    //RegEx cant end without '/', it interprets "blog" as a flag. like \foo.bar/g\ 
+    // where 'g' is the flag. Never mind, it needs 2 "/" at the end. Sigh. :'(
+    // This regex processing is WEIRD - (some even need to start with '/')
+    // NEED to figure out whats happening, gatsby's handling mostly
+    // Even though it's a string, needs to start and end with "/"
     let blogPath = `${__dirname}/src/pages/${blog.path}/`
     let filePath = `${blogPath}posts/index.md`
 
@@ -268,25 +271,167 @@ function generateBlogPostsIndex(graphql, createPage){
 /*
   series/index.js auto generates /blog/series/. This function generates
   "/blog/series/sname/[n]" for each blog (defined in siteMetadata)
+
+  But apparently querying the filesystem in Gatsby is a PITA
+  https://github.com/gatsbyjs/gatsby/issues/3727
+  https://github.com/gatsbyjs/gatsby/issues/3129
+
+  So now I need to figure out what to do (especially since in the index.js and
+    templates I can't loop thorough or do multiple graphQL queries)
+
+  Esentially what I need is {"series1":[<MdNodes>], "series2":[<MdNodes>], ...}
+  And also the index.md file of the series1,2,..n - which will hold 
+    description (body) and metadata (frontmatter)
+  
+  1. Have a list of series in siteMetadata.blogConfig
+  2. Manually query the FS
+  3. Link the dir and file (.md?) nodes on creation (the link above)
+  4. Query flat structure, based on the paths in the nodes, create the tree
+  5. Tag the MD nodes (field) created and use group() in query
+
+  Out of these which ones would work?
+  1. Alright, useful but won't solve the issue by itself
+  2. Not possible in the template files (not sure how SSG works)
+  3. Possible, but complex. Ideally should be in filesystem-source-plugin
+      How will you go about figuring out which node have parent child relation?
+      Significant undertaking, need to think about performance.
+  4. Can't in series/index.js (nor in a template). Actually I can, but need to
+      put the tree creation logic in .js files as well. (maintainence hell)
+  5. This is interesting, regex is a bitch here, but should be possible
+      to do it. If I do, a lot of things become simple.
+
+  OTHER OPTION - question why I need the tree kind of structure at all
+  ============
+  While getting the tree structure would be ideal, I could do the following,
+  Similar to blog/posts, for each blog in the blogConfig
+  - get all dir under $blog/series (by regex filter in query) or this can be 
+    stored in siteMetadata.blogConfig (but I'll have to manually update for every new series)
+  - for each sname under series
+    - find all the markdown files (again filter like in posts)
+    - get the count, calulate the number of pages to be generated
+    - Send to template in loop ($skip, $limit, $seriesPath, $seriesIndexPath)
+      - template will re-query based on seriesPath(sname) and index file path
+      - render the data got
+  
+  This will generate /blog/series/sname/[n]
+  So now I would still need the tree like structure for /blog/series/
+  The .js file can't do query chaining (to get dir under $blog/series first)
+  So instead just have a grpahql query per series, filtering by the regex
+  "$blog/series/sname" for each sname. Manual, but saves a lot of headache.
+
+
+  BUT will this work for blog/index.js?
+  I'll need posts, series, categories. (need to fix up series)
 */
 function generateSeriesPostsIndex(graphql, createPage){
 
-//Query the siteMetadata for the blogs, For each blog -
+  let prArray = [] //the promise array
+  BC.forEach((blog) =>{
+    //  query all the markdown in it's blog/series folder
+    //  with render!=false, publish=true, type!=page
+    //  output : list of series with children (posts in each series).
+    //    similar to series/index.js
 
-  //  query all the markdown in it's blog/series folder
-  //    with render!=false, publish=true, type=post
-  //    sort the post by date
-  //  output : list of series with children (posts in each series).
-  //    similar to series/index.js
+    //RegEx cant end without '/', it interprets "blog" as a flag
+    let seriesRelPath = `/pages/${blog.path}/series/`
+    let seriesAbsPath = `${__dirname}/src${seriesRelPath}`
+    let seriesList = []
+    let task = graphql(`
+      {
+        allDirectory(
+          filter:{relativePath:{regex:"${seriesRelPath}/"}}
+        ){
+          edges{
+            node{
+              relativePath
+            }
+          }
+        }
+      }
+    `)
+    .then(result =>{
+      let edges = result.data.allDirectory.edges
+      seriesList = edges.map(edge => edge.node.relativePath.split("/").pop())
+      let taskletList = []
+      seriesList.forEach(sname =>{
+        let filePath = `${seriesAbsPath}${sname}/index.md`
+        let seriesRegEx =`${seriesRelPath}${sname}//`
+        let tasklet = graphql(`
+          {
+            allMarkdownRemark(
+              filter: {
+                fileAbsolutePath: {regex: "${seriesRegEx}"}
+                frontmatter:{
+                  render: {ne : false}
+                  published: {eq : true}
+                  type: {ne: "page"}
+                }
+              }
+            ){
+              totalCount
+            }
 
-  //  query for the blog/series/sname/index.md - get it's content, frontmatter
-  //    (perhaps use posts per page, etc from here?)
+            markdownRemark(
+              fileAbsolutePath :{eq:"${filePath}"}
+            ){
+              id
+              frontmatter {
+                layout
+                postsPerPage
+              }
+              fields{
+                slug
+              }
+            }
+          }
+        `)
+        taskletList.push(tasklet)
+      })
+      
+      // count number of posts and get the metadata
+      // for each series in the current blog
+      return Promise.all(taskletList)
+    })
+    .then(resultList => {
 
-  //  For each series of the current sub-blog
-  //    Figure out how many pages there should be, generate the pages
-  //    in a loop using (frontmatter.layout || "template/series-posts-index.js")
-  //    
+      resultList.forEach((result,i) => {
 
+        let {allMarkdownRemark, markdownRemark={frontmatter:{}}} = result.data
+        let sname = seriesList[i]
+        if(!markdownRemark || !allMarkdownRemark){
+            console.warn(`Series page not being generated for ${blog}/series/${sname}`)
+            console.warn(`Most likely due to missing index.md page`)
+           return;
+        } 
+
+        let filePath = `${seriesAbsPath}${sname}/index.md`
+        let seriesRegEx =`${seriesRelPath}${sname}//`
+        let layout = markdownRemark.frontmatter.layout || "series-posts-index.js"
+        let postsPerPage = markdownRemark.frontmatter.postsPerPage || 3
+        let numPages = Math.ceil(allMarkdownRemark.totalCount/ postsPerPage)
+        let slug = markdownRemark.fields.slug
+
+        Array.from({ length: numPages }).forEach((_, i) => {
+          createPage({
+            path: i === 0 ? slug : `${slug}${i + 1}`,
+            component: path.resolve(`./src/templates/${layout}`),
+            context: {
+              limit: postsPerPage,
+              skip: i * postsPerPage,
+              seriesPath: seriesRegEx, 
+              filePath
+            },
+          })
+        })
+
+      })
+
+    })
+
+    prArray.push(task)
+  })
+
+  return Promise.all(prArray)
 }
 
 /*
@@ -326,37 +471,3 @@ and even though I did use it in gatsby-node.js, it doesn't seem to recognise, I 
 the stupid plugin auto processes anything under pages/, so if I move the mdx file to components, there is no problem
 
 */
-
-function generateFromMDX(graphql, createPage){
-  return graphql(`
-      {
-        allMdx {
-          edges {
-            node {
-              code {
-                scope
-              }
-              fields {
-                slug
-              }
-            }
-          }
-        }
-      }
-    `).then(result => {
-      result.data.allMdx.edges.forEach(({ node }) => {
-        console.log("== Creating page ==", node) // this is called, still get warning :(
-        // and the page rendered is not with my template, just vanilla mdx rendering of the plugin
-        createPage({
-          path: node.fields.slug,
-          component: componentWithMDXScope(
-            path.resolve(`./src/templates/mdx-post.js`),
-            node.code.scope
-          ),
-          context: {
-            slug: node.fields.slug,
-          }
-        })
-      })
-    })
-}

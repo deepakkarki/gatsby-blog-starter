@@ -1,7 +1,6 @@
 ---
 title: "Post D"
-date: "2018-10-15"
-published: true
+date: "2018-10-10"
 ---
 
 This is **post** D.

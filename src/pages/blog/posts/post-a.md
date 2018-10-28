@@ -16,6 +16,8 @@ def foo():
     print "foo"
 ```
 
+<my-button>This works!</my-button>
+
 > This is post A.
 
 `This is post A.`

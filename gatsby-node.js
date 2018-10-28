@@ -320,6 +320,15 @@ function generateBlogPostsIndex(graphql, createPage){
   So instead just have a grpahql query per series, filtering by the regex
   "$blog/series/sname" for each sname. Manual, but saves a lot of headache.
 
+  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  GOD DAMN I DID NOT KNOW ABOUT props.pageContext
+  Basically it gets whatever you pass to context:{} in createPage()
+  THIS CHANGES EVERYTHING.
+  Look at examples -
+  https://www.gatsbyjs.org/docs/using-unstructured-data/
+  https://www.gatsbyjs.org/docs/adding-tags-and-categories-to-blog-posts/
+  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 
   BUT will this work for blog/index.js?
   I'll need posts, series, categories. (need to fix up series)

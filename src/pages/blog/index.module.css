@@ -10,3 +10,7 @@
 .blogPostDate{
     color: grey;
 }
+
+.categoryTitle{
+  text-transform: capitalize;
+}

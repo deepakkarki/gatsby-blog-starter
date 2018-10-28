@@ -7,8 +7,6 @@ export default ({ data }) => {
   let postNodes = data.allPosts.edges.map( edge => edge.node )
   let js30Nodes = data.js30.edges.map( edge => edge.node )
   let categories = data.allCategories.group
-  console.log(categories)
-  window.categories = categories
 
   return (
     <Layout>
@@ -54,7 +52,7 @@ export default ({ data }) => {
                 <h3>{category.fieldValue}</h3>
                 {category.edges.map( ({node}) => (
                   <div key={node.id}>
-                    <h2 className={styles.blogPostTitle}> <Link to={node.fields.slug||""}>{node.frontmatter.title}</Link> </h2> 
+                    <h2 className={styles.blogPostTitle}> <Link to={node.fields.slug}>{node.frontmatter.title}</Link> </h2> 
                     <span className={styles.blogPostDate}> {node.frontmatter.date}</span>
                     <p>{node.excerpt}</p>
                   </div>

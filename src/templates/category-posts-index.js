@@ -37,7 +37,6 @@ export const categoryListQuery = graphql`
       filter: {
         fileAbsolutePath: {regex: $blogPath},
         frontmatter:{
-          render: {ne : false},
           published: {eq : true},
           type: {ne: "page"},
           categories: {in: [$category]}

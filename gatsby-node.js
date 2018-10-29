@@ -461,9 +461,9 @@ function generateCategoryPostsIndex(graphql, createPage){
           filter: {
             fileAbsolutePath: {regex: "${blogPath}/"}
             frontmatter:{
-              render: {ne : false}
               published: {eq : true}
               type: {ne: "page"}
+              categories: {ne: null}
             }
           }
         ){
@@ -475,6 +475,10 @@ function generateCategoryPostsIndex(graphql, createPage){
       }
     `)
     .then(result => {
+      // if no posts with categories
+      if(!result.data.allMarkdownRemark){
+        return ""
+      }
       let categories = result.data.allMarkdownRemark.group
       let layout = "category-posts-index.js"
       let postsPerPage = 3

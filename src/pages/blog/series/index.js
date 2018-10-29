@@ -19,16 +19,13 @@ export default ({ data }) => {
     "js30" : "JS 30",
     "jsFoo" : "JS FOO"
   }
-  console.log(data)
   return (
     <Layout>
       <div>
         <h2>Categories</h2>
         {
           Object.entries(seriesNameMap).map(([series, name])=>{
-            console.log(series, name)
             let nodes = data[series].edges.map( edge => edge.node )
-            console.log(nodes)
             return (
             <div>
               <h2>{name}</h2>

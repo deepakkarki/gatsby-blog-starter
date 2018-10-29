@@ -1,7 +1,9 @@
 module.exports = {
 
   siteMetadata: {
-    title: 'Portfolio',
+    title: `Portfolio`,
+    siteUrl:`http://localhost:8000`,
+    description:`This is a website`,
     navLinks: {
       home : "/",
       blog : "/blog/",
@@ -37,6 +39,120 @@ module.exports = {
       },
     },
     `gatsby-transformer-remark`,
-    // `gatsby-mdx`, //- doesn't work :( 
+    `gatsby-mdx`, //- doesn't work :( 
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allMarkdownRemark } }) => {
+              return allMarkdownRemark.edges.map(edge => {
+                return Object.assign({}, edge.node.frontmatter, {
+                  description: edge.node.excerpt,
+                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  custom_elements: [{ "content:encoded": edge.node.html }],
+                })
+              })
+            },
+            query: `
+              {
+                allMarkdownRemark(
+                  limit: 1000,
+                  sort: { order: DESC, fields: [frontmatter___date] },
+                  filter: {
+                    frontmatter: { published: { eq: true }, type: {ne: "page"} }
+                    fileAbsolutePath: {regex: "${__dirname}/src/pages/blog//"}
+                  }
+                ) {
+                  edges {
+                    node {
+                      excerpt
+                      html
+                      fields { slug }
+                      frontmatter {
+                        title
+                        date
+                      }
+                    }
+                  }
+                }
+              }
+            `,
+            output: "/blog/rss.xml",
+            title: "Blog RSS Feed",
+          }
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allMarkdownRemark } }) => {
+              return allMarkdownRemark.edges.map(edge => {
+                return Object.assign({}, edge.node.frontmatter, {
+                  description: edge.node.excerpt,
+                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  custom_elements: [{ "content:encoded": edge.node.html }],
+                })
+              })
+            },
+            query: `
+              {
+                allMarkdownRemark(
+                  limit: 1000,
+                  sort: { order: DESC, fields: [frontmatter___date] },
+                  filter: {
+                    frontmatter: { published: { eq: true }, type: {ne: "page"} }
+                    fileAbsolutePath: {regex: "${__dirname}/src/pages/blog2//"}
+                  }
+                ) {
+                  edges {
+                    node {
+                      excerpt
+                      html
+                      fields { slug }
+                      frontmatter {
+                        title
+                        date
+                      }
+                    }
+                  }
+                }
+              }
+            `,
+            output: "/blog2/rss.xml",
+            title: "Blog2 RSS Feed",
+          },
+        ],
+      },
+    },
   ],
 }

@@ -22,3 +22,6 @@ def foo():
 
 `This is post A.`
 
+This is a <i-link to="/about"> to about </i-link>
+
+This is [an external link](https://github.com)

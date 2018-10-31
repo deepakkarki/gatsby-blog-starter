@@ -39,6 +39,7 @@ module.exports = {
       },
     },
     `gatsby-transformer-remark`,
+    `gatsby-plugin-sitemap`,
     `gatsby-mdx`, //- doesn't work :( 
     {
       resolve: `gatsby-plugin-feed`,

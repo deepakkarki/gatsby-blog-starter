@@ -1,14 +1,14 @@
 .header{
-    max-width: 960px;
-    margin: auto;
+    max-width: 1200px;
+    margin: 0 auto;
     border-bottom: 2px solid black;
 }
 
-.header h1{
+.header h2{
     display: inline-block;
 }
 
-.header h1 a{
+.header h2 a{
     text-decoration: none;
     color: blue;
 }

@@ -3,9 +3,8 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
-import Header from './header'
-import './layout.css'
-import layoutStyles from "./layout.module.css"
+import Header from './header/header.js'
+import styles from './layout.module.css'
 
 
 const Layout = ({ children }) => (
@@ -33,7 +32,7 @@ const Layout = ({ children }) => (
 
 
         <Header siteTitle={data.site.siteMetadata.title} />
-        <div className={layoutStyles.wrapper}>
+        <div className={styles.bodyWrapper}>
           {children}
         </div>
       </>

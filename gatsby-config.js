@@ -4,11 +4,11 @@ module.exports = {
     title: `Portfolio`,
     siteUrl:`http://localhost:8000`,
     description:`This is a website`,
-    navLinks: {
-      home : "/",
-      blog : "/blog/",
-      about : "/about/"
-    },
+    navItems: [
+      {name: "ABOUT", url: "/about"},
+      {name: "BLOG", url: "/blog"},
+      {name: "CONTACT", url: "/contact"},
+    ],
     blogConfig: [
       {
         name : "blog #1",

@@ -31,6 +31,7 @@ module.exports = {
 
   plugins: [
     `gatsby-plugin-react-helmet`,
+
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -38,9 +39,32 @@ module.exports = {
         path: `${__dirname}/src/`,
       },
     },
-    `gatsby-transformer-remark`,
+
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              showLineNumbers: false,
+            }
+          }
+        ]
+      }
+    },
+
     `gatsby-plugin-sitemap`,
+
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography.js`,
+      },
+    },
+
     `gatsby-mdx`, //- doesn't work :( 
+
     {
       resolve: `gatsby-plugin-feed`,
       options: {

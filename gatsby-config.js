@@ -1,7 +1,7 @@
 module.exports = {
 
   siteMetadata: {
-    title: `Portfolio`,
+    title: `DiscoverDev`,
     siteUrl:`http://localhost:8000`,
     description:`This is a website`,
     navItems: [

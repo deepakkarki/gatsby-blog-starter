@@ -4,6 +4,7 @@ import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
 import Header from './header/header.js'
+import Newsletter from './newsletter/newsletter.js'
 import styles from './layout.module.css'
 
 
@@ -36,6 +37,7 @@ const Layout = ({ children }) => (
           <div className={styles.contentWrapper}>
             {children}
           </div>
+          <Newsletter/>
         </div>
       </>
     )}

@@ -1,5 +1,11 @@
 .bodyWrapper{
   max-width: 1200px;
   margin: 2em auto;
-  overflow: auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.contentWrapper{
+  max-width: 800px;
+  flex: 1 1 auto;
 }

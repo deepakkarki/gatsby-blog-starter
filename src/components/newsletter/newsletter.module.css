@@ -1,0 +1,51 @@
+.signupBox{
+  border: 2px solid black;
+  padding: 1em;
+  max-width: 320px;
+}
+
+.title{
+  margin: 0;
+  padding: 0.5em;
+  text-align: center;
+  border: 2px solid black;
+  box-shadow: 4px -4px #000;
+}
+
+.message{
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-size: 0.9em;
+  color: #1a1a1a;
+
+}
+
+.form{
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+.email{
+  border: 2px solid #000;
+  padding-left: 5px;
+  margin: 10px auto;
+  height: 35px;
+}
+
+.submit{
+  border: none;
+  background-color: #000;
+  font-weight: bold;
+  color: #fff;
+  margin: 10px 0;
+  height: 35px;
+  width: 60%;
+}
+
+.privacy{
+  color: #4c4c4c;
+  line-height: 1.5;
+  font-size: 0.75em;
+  font-style: italic;
+  margin-bottom: 5px;
+}

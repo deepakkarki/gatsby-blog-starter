@@ -33,7 +33,9 @@ const Layout = ({ children }) => (
 
         <Header siteTitle={data.site.siteMetadata.title} />
         <div className={styles.bodyWrapper}>
-          {children}
+          <div className={styles.contentWrapper}>
+            {children}
+          </div>
         </div>
       </>
     )}

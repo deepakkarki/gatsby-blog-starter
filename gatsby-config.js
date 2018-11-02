@@ -5,9 +5,9 @@ module.exports = {
     siteUrl:`http://localhost:8000`,
     description:`This is a website`,
     navItems: [
-      {name: "ABOUT", url: "/about"},
-      {name: "BLOG", url: "/blog"},
-      {name: "CONTACT", url: "/contact"},
+      {name: "Home", url: "/"},
+      {name: "About", url: "/about"},
+      {name: "Blog", url: "/blog"},
     ],
     blogConfig: [
       {

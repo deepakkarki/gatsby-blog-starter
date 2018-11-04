@@ -31,8 +31,8 @@ const Nav = () => (
         </h2>
         <ul className={styles.navMenu}>
           {
-            meta.navItems.map(item => (
-              <li className={styles.navItem}>
+            meta.navItems.map((item, i) => (
+              <li key={i} className={styles.navItem}>
                 <Link to={item.url}>{item.name}</Link>
               </li>
             ))

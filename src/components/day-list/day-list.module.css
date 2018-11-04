@@ -1,0 +1,69 @@
+.dayList{
+  font-family: 'Inconsolata', monospace;
+}
+
+.title{
+  display: inline-block;
+  font-size: 24px;
+  font-weight: bold;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #000;
+  font-family: 'Inconsolata', monospace;
+}
+
+.permalink{
+  color: #000;
+  font-size: 14px;
+  vertical-align: sub;
+  margin-left: 10px;
+  text-decoration: underline;
+}
+
+.links{
+  list-style-type: none;
+  display: block;
+  margin-left: 0;
+}
+
+.linkItem{
+  display: block;
+  padding-bottom: 2em;
+  margin-bottom: 0;
+}
+
+.postLink{
+  font-weight: 400;
+  margin: 0;
+  display: inline;
+  font-family: 'Inconsolata', monospace;
+}
+
+.postLink a{
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 2px 0;
+  color: #00f;
+}
+
+.domain{
+  font-style: italic;
+  font-size: 14px;
+}
+
+.description{
+  padding: 3px 0;
+  color: #333;
+  display: none;
+}
+
+.tags{
+  font-size: 16px;
+  text-decoration: underline;
+  color: black;
+}
+
+.tag{
+  padding-right: 1em;
+}

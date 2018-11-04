@@ -28,6 +28,7 @@ const Layout = ({ children }) => (
             { name: 'keywords', content: 'developer, web, frontend, javascript' },
           ]}
         >
+          <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet"/>
           <html lang="en" />
         </Helmet>
 

@@ -7,7 +7,7 @@ const Newsletter = () => (
       STAY UPDATED
     </h2>
     <p className={styles.message}>
-      Join 5000+ fellow software engineers and keep up with the top engineering content from companies all over the world. Carefully handpicked and delivered to your mailbox every week! <br/>
+    Join 5000+ fellow software engineers (from Google, Facebook, Microsoft, Quora, and more) and keep up with the top engineering content from companies all over the world. Carefully handpicked and delivered to your mailbox every week! <br/>
     </p>
     <form className={styles.form} action="https://discoverdev.us16.list-manage.com/subscribe/post" method="POST">
       <input type="hidden" name="u" value="c32352dc58bef5cdd7821a012"/>

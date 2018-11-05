@@ -4,11 +4,12 @@
   max-width: 320px;
   align-self: flex-start;
   margin-top: 2em;
+  background: #ffffe0;
 }
 
 .title{
   margin: 0;
-  padding: 0.5em;
+  padding: 0.25em;
   text-align: center;
   border: 2px solid black;
   box-shadow: 4px -4px #000;
@@ -18,7 +19,7 @@
 .message{
   margin-top: 1.5em;
   margin-bottom: 0.5em;
-  font-size: 0.95em;
+  font-size: 1em;
   color: #1a1a1a;
   font-family: Inconsolata, monospace;
   line-height: 1.4;

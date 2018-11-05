@@ -6,6 +6,7 @@
   display: inline-block;
   font-size: 24px;
   font-weight: bold;
+  margin-top: 1.8em;
   padding-bottom: 4px;
   border-bottom: 2px solid #000;
   font-family: 'Inconsolata', monospace;
@@ -41,7 +42,7 @@
 .postLink a{
   text-decoration: none;
   display: inline-block;
-  font-size: 18px;
+  font-size: 19px;
   font-weight: bold;
   padding: 2px 0;
   color: #00f;

@@ -3,9 +3,10 @@ module.exports = {
   siteMetadata: {
     title: `DiscoverDev`,
     siteUrl:`http://localhost:8000`,
-    description:`This is a website`,
+    description:`Discover Dev`,
     navItems: [
-      {name: "Home", url: "/"},
+      {name: "Archive", url: "/archive"},
+      {name: "Tags", url: "/tags"},
       {name: "About", url: "/about"},
       {name: "Blog", url: "/blog"},
     ],

@@ -4,6 +4,7 @@
   max-width: 320px;
   align-self: flex-start;
   margin-top: 2em;
+  margin-right: 20px;
   background: #ffffe0;
 }
 
@@ -36,6 +37,8 @@
   padding-left: 5px;
   margin: 10px auto;
   height: 35px;
+  width: 80%;
+  max-width: 400px;
   font-family: Inconsolata, monospace;
 }
 
@@ -47,6 +50,7 @@
   margin: 10px 0;
   height: 35px;
   width: 60%;
+  max-width: 400px;
   font-family: Inconsolata, monospace;
 }
 
@@ -56,5 +60,21 @@
   font-size: 0.75em;
   font-style: italic;
   margin-bottom: 5px;
+  text-align: center;
+  font-size: 0.85em;
   font-family: Inconsolata, monospace;
+}
+
+@media only screen and (max-width: 1000px){
+  .signupBox{
+    align-self: center;
+    margin-right: 0;
+    max-width: 80%;
+  }
+}
+
+@media only screen and (max-width: 750px){
+  .signupBox{
+    max-width: 90%;
+  }
 }

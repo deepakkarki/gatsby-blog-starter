@@ -2,10 +2,34 @@
   max-width: 1200px;
   margin: 2em auto;
   display: flex;
-  justify-content: space-around;
+  padding: 0 2%;
+  justify-content: space-between;
 }
 
 .contentWrapper{
-  max-width: 800px;
+  max-width: 840px;
+  padding: 0 20px;
   flex: 1 1 auto;
+}
+
+@media only screen and (max-width: 1000px){
+  .bodyWrapper{
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 800px){
+  .bodyWrapper{
+    flex-direction: column-reverse;
+    align-items: unset; 
+    /* somehow the content stops compressing after 450px-ish 
+    if align-items is set! weird! */
+  }
+}
+
+@media only screen and (max-width: 600px){
+  .contentWrapper{
+    padding: 0 10px;
+  }
 }

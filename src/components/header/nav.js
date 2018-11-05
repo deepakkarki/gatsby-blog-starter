@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql, StaticQuery, Link } from 'gatsby'
 import styles from "./nav.module.css"
+import logo from "../../images/dd-logo-and-text.svg"
 
 const Nav = () => (
   <StaticQuery
@@ -24,11 +25,9 @@ const Nav = () => (
       let meta = props.site.siteMetadata
       return(
       <nav className={styles.nav}>
-        <h2 className={styles.siteTitle}>
-          <Link to="/">
-            {meta.title}
-          </Link>
-        </h2>
+        <Link className={styles.homeLink} to="/">
+          <img className={styles.siteLogo} src={logo} alt="DiscoverDev logo"></img>
+        </Link>
         <ul className={styles.navMenu}>
           {
             meta.navItems.map((item, i) => (

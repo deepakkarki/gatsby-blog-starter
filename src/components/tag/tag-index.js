@@ -3,7 +3,7 @@ import styles from './tag-index.module.css'
 
 const TagIndex = ({tags}) => (
   <div className={styles.tagList}>
-    <div className={styles.titleWrap}><h1 className={styles.title}>Tags</h1></div>
+    <div className={styles.titleWrap}><h1 className={styles.title}>TAGS</h1></div>
     <ul className={styles.tags}>
       {tags.map((tag, i) =>(
         <li key={i} className={styles.tagItem}>

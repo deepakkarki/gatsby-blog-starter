@@ -1,9 +1,8 @@
 import React from 'react'
-import { Link } from 'gatsby'
 
 import Layout from '../components/layout'
 import DayList from '../components/day-list/day-list'
-import data from './links.js'
+import data from '../mock-data/links'
 
 const IndexPage = () => (
   <Layout>

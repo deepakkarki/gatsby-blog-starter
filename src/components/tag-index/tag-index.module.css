@@ -1,0 +1,33 @@
+.tagList{
+  font-family: 'Inconsolata', monospace;
+}
+
+.titleWrap{
+  display: flex;
+  justify-content: center;
+}
+
+.title{
+  font-size: 2.5em;
+  margin-top: 1.2em;
+  padding-bottom: 4px;
+  border-bottom: 3px solid #000;
+  font-family: 'Inconsolata', monospace;
+}
+
+.tags{
+  list-style-type: none;
+  margin-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tagItem{
+  padding: 5px;
+  border: 1px solid;
+  margin: 10px;
+  font-weight: bold;
+  color: blue;
+  line-height: 1;
+  border-radius: 5px;
+}

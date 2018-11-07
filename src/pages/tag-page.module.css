@@ -1,0 +1,17 @@
+.dayList{
+  font-family: 'Inconsolata', monospace;
+}
+
+.titleWrap{
+  display: flex;
+  justify-content: center;
+}
+
+.title{
+  font-size: 24px;
+  font-weight: bold;
+  margin: 1.8em auto;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #000;
+  font-family: 'Inconsolata', monospace;
+}

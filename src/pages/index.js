@@ -2,28 +2,56 @@ import React from 'react'
 
 import Layout from '../components/layout'
 import LinkList from '../components/link-list/link-list'
-import data from '../mock-data/links'
 
 import styles from './index.module.css'
+import { graphql } from 'gatsby';
 
-const IndexPage = () => (
-  <Layout>
-    {/* following block in a loop - top 5 posts */}
-    <div className={styles.dayList}>
-      <h1 className={styles.title}>{getDateRep(data.date)}</h1>
-      <a className={styles.permalink} href={`/archive/${data.date}`}>[permalink]</a>
-      <LinkList links={data.links} />
-    </div>
-
-    <div className={styles.dayList}>
-      <h1 className={styles.title}>{getDateRep(data.date)}</h1>
-      <a className={styles.permalink} href={`/archive/${data.date}`}>[permalink]</a>
-      <LinkList links={data.links} />
-    </div>
-  </Layout>
-)
+const IndexPage = ({data}) => {
+  let nodes = data.allLinksJson.edges.map(edge => edge.node)
+  return(
+    <Layout>
+      {
+        nodes.map( (node,i) => (
+          <div key={i} className={styles.dayList}>
+            <h1 className={styles.title}>{getDateRep(node.date)}</h1>
+            <a className={styles.permalink} href={`/archive/${node.date}`}>[permalink]</a>
+            <LinkList links={node.links} />
+          </div>
+          )
+        )
+      }
+    </Layout>
+  )
+}
 
 export default IndexPage
+
+export const IndexQuery = graphql`
+{
+  allLinksJson(
+    sort:{fields:date, order: DESC}
+    limit:5
+  ) {
+    edges {
+      node {
+        file: parent{
+          ... on File{
+            name: relativePath
+          }
+        }
+        date
+        links{
+          title
+          domain
+          tags
+          url
+        }
+      }
+    }
+  }
+}
+
+`
 
 /**
  * dateStr is string of the form '2018-10-22'

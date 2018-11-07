@@ -5,7 +5,7 @@ var slugify = require('slugify')
 
 let BC = siteMetadata.blogConfig
 
-/**
+/*
 
  URL schemes
  ===========

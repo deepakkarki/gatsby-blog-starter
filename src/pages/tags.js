@@ -1,13 +1,29 @@
 import React from 'react'
-
+import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import TagIndex from '../components/tag/tag-index'
-import tags from '../mock-data/tagData' //replaced with GraphQL query?
 
-const TagsPage = () => (
-  <Layout>
-    <TagIndex tags={tags}/>
-  </Layout>
-)
+const TagsPage = ({data}) => {
+  let tags = data.allTagsJson.edges.map(edge => edge.node.tag)
+  return (
+    <Layout>
+      <TagIndex tags={tags}/>
+    </Layout>
+  )
+}
 
 export default TagsPage
+
+export const IndexQuery = graphql`
+{
+  allTagsJson(
+    sort:{fields:articleCount, order:DESC}
+  ){
+    edges {
+      node {
+        tag
+      }
+    }
+  }
+}
+`

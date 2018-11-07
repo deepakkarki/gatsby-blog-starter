@@ -2,12 +2,28 @@ import React from 'react'
 
 import Layout from '../components/layout'
 import ArchiveIndex from '../components/archive/archive-index'
-import archive from '../mock-data/archiveData' //replaced with GraphQL query?
 
-const ArchivePage = () => (
-  <Layout>
-    <ArchiveIndex archive={archive}/>
-  </Layout>
-)
+const ArchivePage = ({data}) => {
+  let dates = data.allLinksJson.edges.map(edge => edge.node.date)
+  return (
+    <Layout>
+      <ArchiveIndex archive={dates}/>
+    </Layout>
+  )
+}
 
 export default ArchivePage
+
+export const ArchiveQuery = graphql`
+{
+  allLinksJson(
+    sort:{fields:date, order: DESC}
+  ) {
+    edges {
+      node {
+        date
+      }
+    }
+  }
+}
+`

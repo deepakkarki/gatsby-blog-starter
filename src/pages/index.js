@@ -34,11 +34,6 @@ export const IndexQuery = graphql`
   ) {
     edges {
       node {
-        file: parent{
-          ... on File{
-            name: relativePath
-          }
-        }
         date
         links{
           title

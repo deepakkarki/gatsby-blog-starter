@@ -38,7 +38,6 @@ export const seriesListQuery = graphql`
       filter: {
         fileAbsolutePath: {regex: $seriesPath},
         frontmatter:{
-          render: {ne : false},
           published: {eq : true},
           type: {ne: "page"}
         }

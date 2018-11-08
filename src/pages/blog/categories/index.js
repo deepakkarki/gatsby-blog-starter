@@ -40,7 +40,6 @@ query {
         regex: "/src/pages/blog//"
       }
       frontmatter:{
-        render: {ne : false}
         published: {eq : true}
         type: {ne: "page"}
       }

@@ -23,10 +23,6 @@ module.exports = {
           "jsFoo"
         ]
       },
-      {
-        name : "blog #2",
-        path: "blog2"
-      }
     ],
   },
 

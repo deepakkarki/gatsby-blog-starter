@@ -210,7 +210,6 @@ function generateFromMD(graphql, createPage){
               frontmatter{
                 layout
                 published
-                render
               }
               fields {
                 slug
@@ -225,7 +224,7 @@ function generateFromMD(graphql, createPage){
         let layout = fm.layout || 'blog-post.js'
 
         // Filter this in the graphql query itself
-        if(fm.published && (fm.render != false)){
+        if(fm.published){
           createPage({
             path: node.fields.slug,
             component: path.resolve(`./src/templates/${layout}`),
@@ -265,7 +264,6 @@ function generateBlogPostsIndex(graphql, createPage){
           filter: {
             fileAbsolutePath: {regex: "${blogPath}/"}
             frontmatter:{
-              render: {ne : false}
               published: {eq : true}
               type: {ne: "page"}
             }
@@ -420,7 +418,6 @@ function generateSeriesPostsIndex(graphql, createPage){
               filter: {
                 fileAbsolutePath: {regex: "${seriesRegEx}"}
                 frontmatter:{
-                  render: {ne : false}
                   published: {eq : true}
                   type: {ne: "page"}
                 }

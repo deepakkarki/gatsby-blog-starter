@@ -77,7 +77,7 @@ export const js30Fragment = graphql`
     js30: allMarkdownRemark(
       filter: {
         fileAbsolutePath: {regex: "/src/pages/blog/series/js30//"}
-        frontmatter:{render: {ne : false}, published: {eq : true}, type: {ne: "page"}}
+        frontmatter:{published: {eq : true}, type: {ne: "page"}}
       }
       sort: { fields: [frontmatter___date], order: DESC }, limit: 3
       ){
@@ -91,7 +91,7 @@ export const jsFooFragment = graphql`
     jsFoo: allMarkdownRemark(
       filter: {
         fileAbsolutePath: {regex: "/src/pages/blog/series/jsFoo//"}
-        frontmatter:{render: {ne : false}, published: {eq : true}, type: {ne: "page"}}
+        frontmatter:{published: {eq : true}, type: {ne: "page"}}
       }
       sort: { fields: [frontmatter___date], order: DESC }, limit: 3
       ){

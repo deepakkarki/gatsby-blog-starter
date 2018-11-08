@@ -38,7 +38,6 @@ export const blogListQuery = graphql`
       filter: {
         fileAbsolutePath: {regex: $blogPath},
         frontmatter:{
-          render: {ne : false},
           published: {eq : true},
           type: {ne: "page"}
         }

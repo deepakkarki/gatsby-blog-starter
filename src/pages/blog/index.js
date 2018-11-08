@@ -74,7 +74,6 @@ export const query = graphql`
           regex: "/src/pages/blog//"
         }
         frontmatter:{
-          render: {ne : false}
           published: {eq : true}
           type: {ne: "page"}
         }
@@ -104,7 +103,6 @@ export const query = graphql`
         regex: "/src/pages/blog/series/js30//"
       }
       frontmatter:{
-        render: {ne : false}
         published: {eq : true}
         type: {ne: "page"}
       }
@@ -133,7 +131,6 @@ export const query = graphql`
         regex: "/src/pages/blog//"
       }
       frontmatter:{
-        render: {ne : false}
         published: {eq : true}
         type: {ne: "page"}
       }

@@ -193,7 +193,10 @@ exports.createPages = ({ graphql, actions }) => {
   // the discoverdev archive
   let p5 = generateDDevArchive(graphql, createPage)
 
-  return Promise.all([p1, p2, p3, p4, p5])
+  // the tag archive for discoverdev
+  let p6 = generateDDevTags(graphql, createPage)
+
+  return Promise.all([p1, p2, p3, p4, p5, p6])
 }
 
 
@@ -595,6 +598,33 @@ function generateDDevArchive(graphql, createPage){
     result.data.allLinksJson.edges.forEach(({ node }) => {
       let slug = `/archive/${node.date}`
       let template = path.resolve(`./src/templates/archive-page/archive-page.js`)
+      createPage({
+        path: slug,
+        component: template,
+        context: {
+          id: node.id,
+        },
+      })
+    })
+  })
+}
+
+function generateDDevTags(graphql, createPage){
+  return graphql(`
+    {
+      allTagsJson{
+        edges {
+          node {
+            id
+            tag
+          }
+        }
+      }
+    }
+  `).then(result => {
+    result.data.allTagsJson.edges.forEach(({ node }) => {
+      let slug = `/tags/${node.tag}`
+      let template = path.resolve(`./src/templates/tag-page/tag-page.js`)
       createPage({
         path: slug,
         component: template,

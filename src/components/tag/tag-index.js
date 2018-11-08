@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'gatsby'
+
 import styles from './tag-index.module.css'
 
 const TagIndex = ({tags}) => (
@@ -7,9 +9,9 @@ const TagIndex = ({tags}) => (
     <ul className={styles.tags}>
       {tags.map((tag, i) =>(
         <li key={i} className={styles.tagItem}>
-            <a href={`/tags/${tag}`} className={styles.tagLink} target="_blank" rel="noopener noreferrer">
+            <Link to={`/tags/${tag}`} className={styles.tagLink} rel="noopener noreferrer">
                 {tag}
-            </a>
+            </Link>
         </li>
       ))}
     </ul>

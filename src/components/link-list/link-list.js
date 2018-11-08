@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './link-list.module.css'
+import { Link } from 'gatsby'
 
 /**
  * This is the component for one days worth of links
@@ -24,7 +25,7 @@ const LinkList = ({links}) => (
           <p className={styles.tags}>
             {
               link.tags.map((tag, i) => (
-                <a key={i} className={styles.tag} href={`/tags/${tag}`}>#{tag}</a>
+                <Link key={i} className={styles.tag} to={`/tags/${tag}`}>#{tag}</Link>
               ))
             }
           </p>

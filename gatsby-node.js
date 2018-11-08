@@ -190,7 +190,10 @@ exports.createPages = ({ graphql, actions }) => {
   // paginated post index for each category. "/blog/categories/cname/[n]"
   let p4 = generateCategoryPostsIndex(graphql, createPage)
 
-  return Promise.all([p1, p2, p3, p4])
+  // the discoverdev archive
+  let p5 = generateDDevArchive(graphql, createPage)
+
+  return Promise.all([p1, p2, p3, p4, p5])
 }
 
 
@@ -486,6 +489,7 @@ function generateSeriesPostsIndex(graphql, createPage){
   return Promise.all(prArray)
 }
 
+
 /*
   caregories/index.js auto generates /blog/series/. This function generates
   "/blog/categories/cname/[n]" for each blog (defined in siteMetadata)
@@ -568,6 +572,39 @@ function generateCategoryPostsIndex(graphql, createPage){
 }
 
 
+/**
+  This function should generate each of the archive page
+  eg. `archive/2018-05-24`
+  So I need to iterate through the daily links and for each
+    I need to call createPage with template archive-page.js
+    and id of the linksJson node in context.
+ */
+function generateDDevArchive(graphql, createPage){
+  return graphql(`
+    {
+      allLinksJson{
+        edges {
+          node {
+            id
+            date
+          }
+        }
+      }
+    }
+  `).then(result => {
+    result.data.allLinksJson.edges.forEach(({ node }) => {
+      let slug = `/archive/${node.date}`
+      let template = path.resolve(`./src/templates/archive-page/archive-page.js`)
+      createPage({
+        path: slug,
+        component: template,
+        context: {
+          id: node.id,
+        },
+      })
+    })
+  })
+}
 
 /*
 NOTE: `generateFromMDX` is not used as of now, due to this stupid warning message.

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'gatsby'
 import styles from './archive-index.module.css'
 
 /*
@@ -11,9 +12,9 @@ const ArchiveIndex = ({archive}) => (
     <ul className={styles.archiveList}>
       {archive.map((ai, i) =>(
         <li key={i} className={styles.archiveItem}>
-            <a href={`/archive/${ai}`} target="_blank" rel="noopener noreferrer">
+            <Link to={`/archive/${ai}`} rel="noopener noreferrer">
                 {getDateRep(ai)}
-            </a>
+            </Link>
         </li>
       ))}
     </ul>

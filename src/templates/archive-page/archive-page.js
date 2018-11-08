@@ -1,27 +1,43 @@
 /*
  This is a single archive page,
  i.e. that of say 'archive/2018-06-06'
-
- I wonder if this should be in src/templates finally
- I guess that's how this will be used after all...
 */
-import React from 'react'
 
-import Layout from '../components/layout'
-import LinkList from '../components/link-list/link-list'
-import data from '../mock-data/links'
+import React from 'react'
+import { graphql } from 'gatsby'
+import Layout from '../../components/layout'
+import LinkList from '../../components/link-list/link-list'
 import styles from './archive-page.module.css'
 
-const ArchivePage = () => (
-  <Layout>
-    <div className={styles.dayList}>
-      <div className={styles.titleWrap}><h1 className={styles.title}>Archive | {getDateRep(data.date)}</h1></div>
-      <LinkList links={data.links}/>
-    </div>
-  </Layout>
-)
+const ArchivePage = ({data}) => {
+  let {date, links} = data.linksJson
+  return (
+    <Layout>
+      <div className={styles.dayList}>
+        <div className={styles.titleWrap}><h1 className={styles.title}>Archive | {getDateRep(date)}</h1></div>
+        <LinkList links={links}/>
+      </div>
+    </Layout>
+  )
+}
 
 export default ArchivePage
+
+export const ArchivePageQuery = graphql`
+  query ArchivePageQuery($id: String!){
+    linksJson(
+      id: { eq : $id }
+    ){
+      date
+      links{
+        url
+        tags
+        title
+        domain
+      }
+    }
+  }
+`
 
 
 /**

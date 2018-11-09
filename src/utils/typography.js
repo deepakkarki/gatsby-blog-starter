@@ -9,6 +9,10 @@ parnassusTheme.scaleRatio = 2.25,
 parnassusTheme.overrideThemeStyles = ({adjustFontSizeTo, rhythm}, options, styles) => {
 
   return { 
+    body: {
+      minHeight: "100vh",
+      position: "relative",
+    },
     blockquote: {
         ...adjustFontSizeTo('17px'),
         fontStyle: 'italic',

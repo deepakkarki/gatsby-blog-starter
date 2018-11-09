@@ -40,6 +40,11 @@ const Layout = ({ children }) => (
           </div>
           <Newsletter/>
         </div>
+        <footer className={styles.footer}>
+          <p className={styles.footerMsg}>Made with ♥ by a group of nerds on Earth!</p>
+          <p className={styles.copyright}>© Copyright 2018 Discoverdev.io</p>
+        </footer>
+        <div className={styles.ghostFooter}></div>
       </>
     )}
   />

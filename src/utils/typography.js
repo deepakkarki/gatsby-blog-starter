@@ -1,9 +1,31 @@
 import Typography from "typography"
 import parnassusTheme from "typography-theme-parnassus"
 
-// weirdly I can't put this in overrideThemeStyles
+/* 
+ Weirdly I can't put this in overrideThemeStyles! Well duh.
+ The theme is basically a JS object viz the configuration. See the following link on how to use
+ https://github.com/KyleAMathews/typography.js/blob/master/packages/typography-theme-parnassus/src/index.js
+
+ `overrideThemeStyles()` just overrides the styling applied to specific elements. 
+ Basically selector followed by rules. So most while I can't
+ { baseFontSize : '17px'} , I can mostly do
+ { html : { fontSize : '17px'} }.
+*/
+
+
 parnassusTheme.baseFontSize = '17px'
-parnassusTheme.scaleRatio = 2.25,
+parnassusTheme.scaleRatio = 2.75
+parnassusTheme.googleFonts = [
+    {
+      name: 'Inconsolata',
+      styles: ['400', '700'],
+    }
+  ]
+parnassusTheme.headerFontFamily = ['Inconsolata', 'monospace']
+parnassusTheme.bodyFontFamily = ['Inconsolata', 'monospace']
+parnassusTheme.baseLineHeight = 1.55
+parnassusTheme.headerColor = 'hsla(0,0%,0%,0.9)',
+parnassusTheme.bodyColor = 'hsla(0,0%,0%,0.85)',
 
 
 parnassusTheme.overrideThemeStyles = ({adjustFontSizeTo, rhythm}, options, styles) => {
@@ -12,7 +34,6 @@ parnassusTheme.overrideThemeStyles = ({adjustFontSizeTo, rhythm}, options, style
     body: {
       minHeight: "100vh",
       position: "relative",
-      fontFamily: `'Inconsolata', monospace`,
     },
     blockquote: {
         ...adjustFontSizeTo('17px'),

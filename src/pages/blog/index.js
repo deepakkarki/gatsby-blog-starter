@@ -47,8 +47,8 @@ export default ({ data }) => {
         <h2>Categories</h2>
         <div className={styles.blogList}>
           {
-            categories.map(category => (
-              <div>
+            categories.map((category, i) => (
+              <div key={i}>
                 <h3>{category.fieldValue}</h3>
                 {category.edges.map( ({node}) => (
                   <div key={node.id}>

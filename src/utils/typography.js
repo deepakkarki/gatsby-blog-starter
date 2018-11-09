@@ -12,6 +12,7 @@ parnassusTheme.overrideThemeStyles = ({adjustFontSizeTo, rhythm}, options, style
     body: {
       minHeight: "100vh",
       position: "relative",
+      fontFamily: `'Inconsolata', monospace`,
     },
     blockquote: {
         ...adjustFontSizeTo('17px'),

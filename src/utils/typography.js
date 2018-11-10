@@ -47,7 +47,7 @@ parnassusTheme.overrideThemeStyles = ({adjustFontSizeTo, rhythm}, options, style
     
     a: {
         boxShadow: 'none',
-        color: 'inherit',
+        color: 'blue',
         backgroundColor: 'inherit',
     },
 

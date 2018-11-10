@@ -40,9 +40,9 @@
 .tags{
   font-size: 16px;
   text-decoration: underline;
-  color: black;
 }
 
 .tag{
   padding-right: 1em;
+  color: black;
 }

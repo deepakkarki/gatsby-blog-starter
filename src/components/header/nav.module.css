@@ -27,7 +27,6 @@
 .navItem{
   margin-right: 20px;
   margin-bottom: 0;
-  color: black;
   line-height: 1;
   font-size: 1.125em;
   font-weight: 400;
@@ -38,6 +37,7 @@
 }
 
 .navItem a{
+  color: black;
   transition: all ease-in-out .3s;
   padding-bottom: 4px;
   padding-right: 2px;

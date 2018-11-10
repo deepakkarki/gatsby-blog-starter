@@ -222,6 +222,7 @@ function generateFromMD(graphql, createPage){
       result.data.allMarkdownRemark.edges.forEach(({ node }) => {
         let fm = node.frontmatter || {}
         let layout = fm.layout || 'blog-post.js'
+        layout = layout == 'post'? 'blog-post.js' : layout
 
         // Filter this in the graphql query itself
         if(fm.published){

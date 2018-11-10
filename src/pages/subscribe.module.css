@@ -1,0 +1,14 @@
+.title{
+  text-align: center;
+  text-decoration: underline;
+}
+
+.newsletter{
+  display: flex;
+  justify-content: center;
+}
+
+.desc{
+  max-width: 680px;
+  margin: 0 auto;
+}

@@ -9,6 +9,7 @@ module.exports = {
       {name: "Tags", url: "/tags"},
       {name: "About", url: "/about"},
       {name: "Blog", url: "/blog"},
+      {name: "Subscribe", url: "/subscribe"},
     ],
     blogConfig: [
       {

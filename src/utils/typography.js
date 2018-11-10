@@ -49,6 +49,11 @@ parnassusTheme.overrideThemeStyles = ({adjustFontSizeTo, rhythm}, options, style
         boxShadow: 'none',
         color: 'inherit',
         backgroundColor: 'inherit',
+    },
+
+    // DAMMIT THIS GETS OVER WRITTEN
+    ':not(pre) > code[class="language-text"]': {
+      padding: '0.2em 0.3em',
     }
   }
 }

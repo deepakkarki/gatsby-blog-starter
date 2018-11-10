@@ -8,7 +8,7 @@ import Newsletter from './newsletter/newsletter.js'
 import styles from './layout.module.css'
 
 
-const Layout = ({ children }) => (
+const Layout = ({ children, sidebar=true }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -38,7 +38,7 @@ const Layout = ({ children }) => (
           <div className={styles.contentWrapper}>
             {children}
           </div>
-          <Newsletter/>
+          {sidebar? <Newsletter/>: null}
         </div>
         <footer className={styles.footer}>
           <p className={styles.footerMsg}>Made with ♥ by a group of nerds on Earth!</p>

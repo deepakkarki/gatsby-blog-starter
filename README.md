@@ -1,106 +1,86 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.org">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby's default starter
-</h1>
+# Discover dev site
 
-Kick off your project with this default boilerplate. This barebones starter ships with the main Gatsby configuration files you might need. 
+This is the website for [DiscoverDev](https://discoverdev.io), implemented using GatsbyJS.
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.org/docs/gatsby-starters/)._
+This also serves as an example for a feature rich app. Gatsby on it's own is just a content ingestion engine, there is no inherent structure to the system. So I've created a system where there is the site itself (Gatsby default), blogs within the site, and categories and series within the blog. A series can have posts within it and a post can belong to multiple categories. I really like this structure, should turn it into a starter theme at some point.
 
-## 🚀 Quick start
+There is quite a bit of documentation in the `gatsby-node.js` file, inlined with the functions. Copying from there,
 
-1.  **Install the Gatsby CLI.**
+### URL schemes
 
-    The Gatsby CLI helps you create new sites using Gatsby starters (like this one!)
+ * `/blog/` --> index page for the blog. (a .js file - auto converted)
+    This will have the overall listing of the series, categories, posts, etc.
+    This needs the posts & pages, series & categories (with their posts under them)
+    Pages are markdown (or .js?)  files which are not posts, i.e. they don’t appear in the feed.
+    Posts are... well, blog posts that is supposed to appear in the feed.
+    The series variable will hold the series under this sub blog along with the posts belonging to each series.
 
-    ```sh
-    # install the Gatsby CLI globally
-    npm install -g gatsby-cli
-    ```
 
-2.  **Create a Gatsby site.**
+ * `/blog/posts` --> index page for the blog post listing
+    This needs to display all the posts within the sub-blog. Also support pagination.
+ * `/blog/posts/2` --> pagination of the blog post listing
+ * `/blog/posts/pname` --> a specific blog post
 
-    Use the Gatsby CLI to create a new site, specifying the default starter.
 
-    ```sh
-    # create a new Gatsby site using the default starter
-    gatsby new my-default-starter
-    ```
+ * `/blog/series` --> index page of all the series in the (sub)blog
+    Needs all series and all the posts under each series. Also do pagination.
+ * `/blog/series/sname` --> listing of all the posts in this series
+ * `/blog/series/sname/2` --> (optional) pagination of the listing in a series
+ * `/blog/series/sname/pname` --> a specific blog post
 
-3.  **Start developing.**
 
-    Navigate into your new site’s directory and start it up.
+ * `/blog/categories` --> index page for the category 
+    Needs all the categories in the sub blog and posts in the categories
+ * `/blog/categories/cname` --> listing of all posts in this category
+ * `/blog/categories/cname/2` --> pagination of the listing in a category
 
-    ```sh
-    cd my-default-starter/
-    gatsby develop
-    ```
 
-4.  **Open the source code and start editing!**
+### MarkDown 
 
-    Your site is now running at `http://localhost:8000`!
-    
-    *Note: You'll also see a second link: `http://localhost:8000/___graphql`. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql).*
-    
-    Open the the `my-default-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
-    
-## 🧐 What's inside?
+The markdown uses custom element support (at least <a> --> <Link> for internal links)
+ - https://using-remark.gatsbyjs.org/custom-components/ (look at the caveats)
+ - https://prestonrichey.com/blog/react-in-markdown/ (look at <hidden/>)
 
-A quick look at the top-level files and directories you'll see in a Gatsby project.
+ Each markdown page will contain the type and layout.
+  * `type` => `page` or `post` or `meta`. Files with `type: post` appear in the blog stream, `type: page` implies it shouldn't appear in the stream. Meta files are `index.md`'s that are used for pagination metadata
+  * `layout` => which ever template is to be applied
+  * `published` => True or False.
 
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── .prettierrc
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    ├── README.md
-    └── yarn.lock
 
-  1.  **`/node_modules`**: The directory where all of the modules of code that your project depends on (npm packages) are automatically installed.  
-  
-  2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser), like your site header, or a page template. “Src” is a convention for “source code”.
-  
-  3.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
-  
-  4.  **`.prettierrc`**: This is a configuration file for a tool called [Prettier](https://prettier.io/), which is a tool to help keep the formatting of your code consistent.
-  
-  5.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.org/docs/browser-apis/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
-  
-  6.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.org/docs/gatsby-config/) for more detail).
-  
-  7.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby node APIs](https://www.gatsbyjs.org/docs/node-apis/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
-  
-  8.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.org/docs/ssr-apis/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
-  
-  9.  **`LICENSE`**: Gatsby is licensed under the MIT license.
-  
-  10.  **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. (You won’t change this file directly).
-  
-  11.  **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
-  
-  12.  **`README.md`**: A text file containing useful reference information about your project.
-  
-  13.  **`yarn.lock`**: [Yarn](https://yarnpkg.com/) is a package manager alternative to npm. You can use either yarn or npm, though all of the Gatsby docs reference npm.  This file serves essentially the same purpose as `package-lock.json`, just for a different package management system.
+### Page Creation
 
-## 🎓 Learning Gatsby
+ So now this should mirror the output of the URLs I expect.
 
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.org/). Here are some places to start:
+ * all posts - do the standard markdown remark processing for all .md nodes.
 
--   **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.org/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
+ * `/blog/` - create the index page. => auto since it's .js files. (better have js
+    files rather than template, as you can customize the UI per sub-blog)
+    this will have to do the query for posts, pages, series, collection itself.
+ * `/blog/(page)` - like /about, /contact and stuff - this should be done via the
+    standard markdown remark rendering I will be doing.
 
--   **To dive straight into code samples head [to our documentation](https://www.gatsbyjs.org/docs/).** In particular, check out the “Guides”, API reference, and “Advanced Tutorials” sections in the sidebar.
+ * `blog/posts/[n]` - this I have to paginate, filter the nodes via query and then
+    send them to templates/post-index.js, do this in a loop (posts/2, /3, etc)
+    Can I somehow add some specific data to be rendered (at top or whatever?)
+ * `blog/posts/pname` - this is should be part of the generic markdown remark processing.
 
-## 💫 Deploy
+ * `blog/series` - This will be an index.js file just like blog's index.js. Again, 
+   just run the query inside the .js file. Or have template/series-index.js?
+   Could come in handy for future pagination if required.
+ * `blog/series/sname/[n]` - this is again paginated. So again loop and render a template file
+    Again worth noting if I can have an index.md file or something that can add specific
+    data or context to the page being rendered. (explaining a bit about the series)
+    (XXX : actually this isn't required? how many posts can there be in a series anyway)
+ * `blog/series/sname/pname` - this should be part of the generic markdown remark processing
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
+ * `/blog/categories` - Again this will be an index.js file, query what it needs.
+ * `/blog/categories/cname/[n]` - pagination. Loop and render a template file.
+    again, would be good if I can have a little custom data per category. 
+
+  NOTE : In case of custom data for paginated entries, I can't have an index.md file,
+  eg. "blog/categories/systems/index.md" as this will be rendered during markdownRemark
+  processing. So unless I deal with this somehow during 'onCreateNode', this will be a mess.
+  Other alternative is that I can have this in the site metadata.
+
+  Never mind, this "blog/categories/systems/index.md" file just needs to mark 
+  "render : false" in it's front-matter. See "MarkDown" section in the top comment.

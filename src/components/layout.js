@@ -8,7 +8,7 @@ import Newsletter from './newsletter/newsletter.js'
 import styles from './layout.module.css'
 
 
-const Layout = ({ children, sidebar=true }) => (
+const Layout = ({ children, sidebar=true, wide=false }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -35,7 +35,7 @@ const Layout = ({ children, sidebar=true }) => (
 
         <Header siteTitle={data.site.siteMetadata.title} />
         <div className={styles.bodyWrapper}>
-          <div className={styles.contentWrapper}>
+          <div className={styles.contentWrapper} style={wide?{maxWidth:"unset"}:null}>
             {children}
           </div>
           {sidebar? <Newsletter/>: null}

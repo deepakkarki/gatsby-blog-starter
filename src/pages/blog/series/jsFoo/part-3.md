@@ -1,7 +1,7 @@
 ---
 title: "Post C"
 date: "2018-10-12"
-published: true
+published: false
 ---
 
 This is **post** C.

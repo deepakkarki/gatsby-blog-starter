@@ -1,7 +1,7 @@
 ---
 title: "Post D"
 date: "2018-10-10"
-published: true
+published: false
 categories:
   - javascript
   - react

@@ -22,7 +22,7 @@ export default ({ data }) => {
   return (
     <Layout>
       <div>
-        <h2>Categories</h2>
+        <h1>Series</h1>
         {
           Object.entries(seriesNameMap).map(([series, name])=>{
             let nodes = data[series].edges.map( edge => edge.node )

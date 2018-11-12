@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../../components/layout"
+import PostGrid from "../../components/post-grid/post-grid"
 import styles from "./index.module.css"
 
 export default ({ data }) => {
@@ -9,42 +10,22 @@ export default ({ data }) => {
   let categories = data.allCategories.group
 
   return (
-    <Layout>
+    <Layout sidebar={false} wide={true}>
       <div>
-        <h1>My Blog posts</h1>
+        <h1 className={styles.title}>Blog @ DiscoverDev</h1>
         <Link to="/blog/posts">See all posts</Link> <br/><br/>
         <Link to="/blog/series">See all series</Link> <br/><br/>
         <Link to="/blog/categories">See all categories</Link><br/><br/>
 
-        <h2>Latest Posts</h2>
-        <div className={styles.blogList}>
-          {
-            postNodes.map( (node) => (
-              <div key={node.id}>
-                <h2 className={styles.blogPostTitle}> <Link to={node.fields.slug}>{node.frontmatter.title}</Link> </h2> 
-                <span className={styles.blogPostDate}> {node.frontmatter.date}</span>
-                <p>{node.excerpt}</p>
-              </div>
-            ))
-          }
-        </div>
+        <h2 className={styles.subTitle}>Latest Posts</h2>
+        <PostGrid posts={postNodes}/>
         <h3><Link to="/blog/posts">See all posts in the blog</Link></h3>
 
-        <h2>JS30 Series</h2>
-        <div className={styles.blogList}>
-          {
-            js30Nodes.map( (node) => (
-              <div key={node.id}>
-                <h2 className={styles.blogPostTitle}> <Link to={node.fields.slug}>{node.frontmatter.title}</Link> </h2> 
-                <span className={styles.blogPostDate}> {node.frontmatter.date}</span>
-                <p>{node.excerpt}</p>
-              </div>
-            ))
-          }
-        </div>
+        <h2 className={styles.subTitle}>JS30 Series</h2>
+        <PostGrid posts={js30Nodes}/>
         <h3><Link to="/blog/series/js30">See all posts in the series</Link></h3>
 
-        <h2>Categories</h2>
+        <h2 className={styles.subTitle}>Categories</h2>
         <div className={styles.blogList}>
           {
             categories.map((category, i) => (
@@ -91,6 +72,7 @@ export const query = graphql`
           frontmatter {
             title
             date(formatString: "DD MMMM, YYYY")
+            desc
           }
           excerpt
         }
@@ -108,7 +90,7 @@ export const query = graphql`
       }
     }
     sort: { fields: [frontmatter___date], order: DESC }
-    limit: 3
+    limit: 6
   ){
     edges{
       node{

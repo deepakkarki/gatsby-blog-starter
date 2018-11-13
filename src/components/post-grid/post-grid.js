@@ -13,9 +13,16 @@ const PostGrid = ({posts}) => (
         <span className={styles.blogPostDate}> {node.frontmatter.date}</span>
         <p className={styles.blogDesc}> {node.frontmatter.desc || node.excerpt} </p>
         <ul className={styles.blogCategories}>
-          <li className={styles.blogCategory}><Link to={`/blog/categories/js`}>javascript</Link></li>
+          { node.frontmatter.categories && 
+              node.frontmatter.categories.map((category,i) => (
+                <li key={i} className={styles.blogCategory}>
+                  <Link to={`/blog/categories/${category}`}>{category}</Link>
+                </li>
+              ))
+          }
+          {/* <li className={styles.blogCategory}><Link to={`/blog/categories/js`}>javascript</Link></li>
           <li className={styles.blogCategory}><Link to={`/blog/categories/js`}>frontend</Link></li>
-          <li className={styles.blogCategory}><Link to={`/blog/categories/js`}>design</Link></li>
+          <li className={styles.blogCategory}><Link to={`/blog/categories/js`}>design</Link></li> */}
         </ul>
       </div>
     ))

@@ -6,7 +6,8 @@ desc: >
 author:
   name: "Deepak Karki"
 published: true
-date: 2018-09-02
+date: 2018-10-02
+categories: ["js", "frontend", "design"]
 ---
 
 This is the first project of Wes Bos's [JS30 series](https://JavaScript30.com/friend/DISCOVERDEV). To see the **whole 30 part series**, [click here](../).

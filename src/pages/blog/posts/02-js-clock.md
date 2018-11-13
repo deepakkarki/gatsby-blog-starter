@@ -6,7 +6,8 @@ desc: >
 author:
   name: "Deepak Karki"
 published: true
-date: 2018-09-02
+date: 2018-10-03
+categories: ["js", "html", "css"]
 ---
 
 

@@ -7,6 +7,7 @@ author:
   name: "Deepak Karki"
 published: true
 date: 2018-09-02
+categories: ["js", "yolo", "fomo"]
 ---
 
 

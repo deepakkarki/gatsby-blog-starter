@@ -7,5 +7,11 @@
   padding-bottom: 1rem;
   border-bottom: 2px solid #333;
   font-size: 2em;
-  margin-bottom: 1.5em;
+  margin-top: 3em;
+  margin-bottom: 1.25em;
+}
+
+.seeMore{
+  margin-top: 1em;
+  font-size: 1.2em;
 }

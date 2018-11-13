@@ -290,7 +290,7 @@ function generateBlogPostsIndex(graphql, createPage){
     .then(result => {
       let {allMarkdownRemark, markdownRemark} = result.data
       let layout = markdownRemark.frontmatter.layout || "blog-posts-index.js"
-      let postsPerPage = markdownRemark.frontmatter.postsPerPage || 3
+      let postsPerPage = markdownRemark.frontmatter.postsPerPage || 5
       let numPages = Math.ceil(allMarkdownRemark.totalCount/ postsPerPage)
       let slug = markdownRemark.fields.slug
 
@@ -302,7 +302,8 @@ function generateBlogPostsIndex(graphql, createPage){
             limit: postsPerPage,
             skip: i * postsPerPage,
             blogPath: blogPath+'/', //apparently you need this :( or it matches 'blog' and 'blog2'
-            filePath
+            filePath,
+            totalPages: numPages
           },
         })
       })

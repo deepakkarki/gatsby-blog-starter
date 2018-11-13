@@ -30,7 +30,7 @@ export default ({ data }) => {
   let postNodes = data.allPosts.edges.map( edge => edge.node )
   let js30Nodes = data.js30.edges.map( edge => edge.node )
   let categories = data.allCategories.group.map(category => {
-    if(category.fieldValue == 'undefined'){ 
+    if(category.fieldValue === 'undefined'){ 
       category.fieldValue = 'uncategorized'
     }
     return category

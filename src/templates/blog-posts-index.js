@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
-import styles from "./blog-posts-index.module.css"
+import PostGrid from "../components/post-grid/post-grid"
 
 export default ({ data }) => {
   let nodes = data.allMarkdownRemark.edges.map( edge => edge.node )
@@ -11,17 +11,7 @@ export default ({ data }) => {
       <div>
         <h1>{index.frontmatter.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: index.html }} />
-        <div className={styles.blogList}>
-          {
-            nodes.map( (node) => (
-              <div key={node.id}>
-                <h2 className={styles.blogPostTitle}> <Link to={node.fields.slug}>{node.frontmatter.title}</Link> </h2> 
-                <span className={styles.blogPostDate}> {node.frontmatter.date}</span>
-                <p>{node.excerpt}</p>
-              </div>
-            ))
-          }
-        </div>
+        <PostGrid posts={nodes}/>
         {/* Do the pagination links over here */}
       </div>
     </Layout>
@@ -52,6 +42,8 @@ export const blogListQuery = graphql`
           frontmatter {
             title
             date(formatString: "DD MMMM, YYYY")
+            desc
+            categories
           }
           excerpt
         }

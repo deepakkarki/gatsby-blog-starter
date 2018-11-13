@@ -1,0 +1,12 @@
+.postList{
+  margin-bottom: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+/* Need to have "parent > child", otherwise specificity won't work out */
+.postList > .postListItem{
+  flex: 1 1 100%;
+  margin-right: 0;
+}

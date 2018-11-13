@@ -5,7 +5,7 @@ import { Link } from 'gatsby'
 
 const PostCard = ({post, className}) => {
   return (
-  <div className={`${styles.blogItem} ${className}`} key={post.id}>
+  <div className={`${className} ${styles.blogItem}`} key={post.id}>
     <h2 className={styles.blogPostTitle}> <Link to={post.fields.slug}>{post.frontmatter.title}</Link> </h2> 
     <span className={styles.blogPostDate}> {post.frontmatter.date}</span>
     <p className={styles.blogDesc}> {post.frontmatter.desc || post.excerpt} </p>

@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
-import PostGrid from "../components/post-grid/post-grid"
+import PostList from "../components/post-list/post-list"
 
 export default ({ data }) => {
   let nodes = data.allMarkdownRemark.edges.map( edge => edge.node )
@@ -11,7 +11,7 @@ export default ({ data }) => {
       <div>
         <h1>{index.frontmatter.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: index.html }} />
-        <PostGrid posts={nodes}/>
+        <PostList posts={nodes} />
         {/* Do the pagination links over here */}
       </div>
     </Layout>

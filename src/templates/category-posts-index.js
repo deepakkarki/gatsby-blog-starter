@@ -1,27 +1,18 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
-import styles from "./blog-posts-index.module.css"
+import PostList from "../components/post-list/post-list"
+import Pagination from "../components/pagination/pagination"
 
-export default ({ data, pageContext }) => {
+export default ({ data, pageContext:{limit, skip, totalPages, category}  }) => {
   let nodes = data.allMarkdownRemark.edges.map( edge => edge.node )
-  const title = pageContext.category
+  let currentPage = Math.floor(skip/limit) +1
   return (
     <Layout>
       <div>
-        <h1>{title}</h1>
-        <div className={styles.blogList}>
-          {
-            nodes.map( (node) => (
-              <div key={node.id}>
-                <h2 className={styles.blogPostTitle}> <Link to={node.fields.slug}>{node.frontmatter.title}</Link> </h2> 
-                <span className={styles.blogPostDate}> {node.frontmatter.date}</span>
-                <p>{node.excerpt}</p>
-              </div>
-            ))
-          }
-        </div>
-        {/* Do the pagination links over here */}
+        <h1>{category}</h1>
+        <PostList posts={nodes} />
+        <Pagination totalPages={totalPages} currentPage={currentPage} baseUrl="/blog/posts/categories"/>
       </div>
     </Layout>
   )
@@ -47,11 +38,12 @@ export const categoryListQuery = graphql`
         node {
           id
           fields{
-              slug
+            slug
           }
           frontmatter {
             title
             date(formatString: "DD MMMM, YYYY")
+            desc
           }
           excerpt
         }

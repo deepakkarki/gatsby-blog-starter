@@ -476,7 +476,9 @@ function generateSeriesPostsIndex(graphql, createPage){
               limit: postsPerPage,
               skip: i * postsPerPage,
               seriesPath: seriesRegEx, 
-              filePath
+              filePath,
+              totalPages: numPages,
+              seriesName: sname
             },
           })
         })
@@ -542,7 +544,8 @@ function generateCategoryPostsIndex(graphql, createPage){
               limit: postsPerPage,
               skip: i * postsPerPage,
               blogPath: blogPath+'/',
-              category: category.fieldValue
+              category: category.fieldValue,
+              totalPages: numPages
             },
           })
         })

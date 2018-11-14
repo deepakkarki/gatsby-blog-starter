@@ -13,6 +13,7 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../../../components/layout"
 import styles from "../index.module.css"
+import PostGrid from "../../../components/post-grid/post-grid"
 
 export default ({ data }) => {
   let seriesNameMap = {
@@ -29,18 +30,10 @@ export default ({ data }) => {
             return (
             <div>
               <h2>{name}</h2>
-              <div className={styles.blogList}>
-                {
-                  nodes.map( (node) => (
-                    <div key={node.id}>
-                      <h2 className={styles.blogPostTitle}> <Link to={node.fields.slug}>{node.frontmatter.title}</Link> </h2> 
-                      <span className={styles.blogPostDate}> {node.frontmatter.date}</span>
-                      <p>{node.excerpt}</p>
-                    </div>
-                  ))
-                }
-              </div>
-              <h3><Link to={`/blog/series/${series}`}>See all posts in the series</Link></h3>
+              <PostGrid posts={nodes}/>
+              <h3 className={styles.seeMore}>
+                <Link to={`/blog/series/${series}`}>See all posts in the series &rarr;</Link>
+              </h3>
             </div>
             )
           })
@@ -79,7 +72,7 @@ export const js30Fragment = graphql`
         fileAbsolutePath: {regex: "/src/pages/blog/series/js30//"}
         frontmatter:{published: {eq : true}, type: {ne: "page"}}
       }
-      sort: { fields: [frontmatter___date], order: DESC }, limit: 3
+      sort: { fields: [frontmatter___date], order: DESC }, limit: 4
       ){
         ...seriesIndex
       }
@@ -93,7 +86,7 @@ export const jsFooFragment = graphql`
         fileAbsolutePath: {regex: "/src/pages/blog/series/jsFoo//"}
         frontmatter:{published: {eq : true}, type: {ne: "page"}}
       }
-      sort: { fields: [frontmatter___date], order: DESC }, limit: 3
+      sort: { fields: [frontmatter___date], order: DESC }, limit: 4
       ){
         ...seriesIndex
       }

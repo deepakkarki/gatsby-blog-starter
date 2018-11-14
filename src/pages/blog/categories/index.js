@@ -2,26 +2,20 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../../../components/layout"
 import styles from "../index.module.css"
+import PostGrid from "../../../components/post-grid/post-grid"
 
 export default ({ data }) => {
   let categories = data.allCategories.group
   return (
     <Layout>
       <div>
-        <h2>Categories</h2>
-        <div className={styles.blogList}>
+        <h1 className={styles.title}>Categories</h1>
+        <div>
           {
             categories.map(category => (
               <div>
-                <h2 className={styles.categoryTitle}>{category.fieldValue}</h2>
-                {category.edges.map( ({node}) => (
-                  <div key={node.id}>
-                    <h2 className={styles.blogPostTitle}> <Link to={node.fields.slug}>{node.frontmatter.title}</Link> </h2> 
-                    <span className={styles.blogPostDate}> {node.frontmatter.date}</span>
-                    <p>{node.excerpt}</p>
-                  </div>
-                ))}
-                <hr/>
+                <h2 className={styles.subTitle}>{category.fieldValue}</h2>
+                 <PostGrid posts={category.edges.map(edge => edge.node)}/>
               </div>
             ))
           }

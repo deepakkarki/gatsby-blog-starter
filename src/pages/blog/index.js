@@ -8,7 +8,8 @@ import styles from "./index.module.css"
 /*
 TODO
 
-Do these after I have a bunch of posts to post.
+Do these after I have a bunch of posts to post. Infact even the categories 
+ section can be removed for now. (No point having 1 or 2 posts/category)
 
 - As of now I'm listing posts and series (with posts under them) and 
   categories (with posts under them). But this is probably a bit to noisy.
@@ -69,7 +70,7 @@ export default ({ data }) => {
         <h2 className={styles.subTitle}>JS30 Series</h2>
         <PostGrid posts={js30Nodes}/>
         <h3 className={styles.seeMore}><Link to="/blog/series/js30">See all posts in the series &rarr;</Link></h3>
-        <h2 className={styles.subTitle}>Categories</h2>
+        {/* <h2 className={styles.subTitle}>Categories</h2>
         <div className={styles.blogList}>
           {
             categories.map((category, i) => category.fieldValue &&(
@@ -79,7 +80,7 @@ export default ({ data }) => {
               </div>
             ))
           }
-        </div>
+        </div> */}
       </div>
     </Layout>
   )

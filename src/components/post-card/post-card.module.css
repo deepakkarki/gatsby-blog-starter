@@ -58,9 +58,9 @@
 
 @media only screen and (max-width: 1050px){
   /* This strongly depends on the blogItem min-width */
-  .blogItem:nth-child(even){
+  /* .blogItem:nth-child(even){
     margin-right: 0;
-  }
+  } */
 }
 
 @media only screen and (max-width: 725px){

@@ -16,6 +16,7 @@ const IndexPage = ({data}) => {
             <h1 className={styles.title}>{getDateRep(node.date)}</h1>
             <a className={styles.permalink} href={`/archive/${node.date}`}>[permalink]</a>
             <LinkList links={node.links} />
+            <hr/>
           </div>
           )
         )

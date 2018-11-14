@@ -1,3 +1,41 @@
+.nav{
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.25em;
+  flex-wrap: wrap;
+  margin-bottom: 1em;
+}
+
+.navItem{
+  display: inline-block;
+}
+
+.navSep{
+  margin: 0 1em;
+}
+
+.intro{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.description{
+  margin: 0;
+  font-size: 18px;
+  padding-right: 2em;
+  flex: 1 1 60%;
+  margin-top: 3em;
+}
+
+.newsletter{
+  flex: 1 1 40%;
+  min-width: 340px;
+  margin-top: 3em;
+}
+
 .title{
   text-align: center;
   text-decoration: underline;

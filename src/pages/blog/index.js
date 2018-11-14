@@ -2,10 +2,14 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../../components/layout"
 import PostGrid from "../../components/post-grid/post-grid"
+import MiniNewsletter from "../../components/newsletter/mini-newsletter"
 import styles from "./index.module.css"
 
 /*
 TODO
+
+Do these after I have a bunch of posts to post.
+
 - As of now I'm listing posts and series (with posts under them) and 
   categories (with posts under them). But this is probably a bit to noisy.
 
@@ -40,9 +44,23 @@ export default ({ data }) => {
     <Layout sidebar={false} wide={true}>
       <div>
         <h1 className={styles.title}>Blog @ DiscoverDev</h1>
-        <Link to="/blog/posts">See all posts</Link> <br/><br/>
-        <Link to="/blog/series">See all series</Link> <br/><br/>
-        <Link to="/blog/categories">See all categories</Link><br/><br/>
+        <nav className={styles.nav}>
+          <Link className={styles.navItem} to="/blog/posts">Posts</Link>
+          <span className={styles.navSep}>/</span>
+          <Link className={styles.navItem} to="/blog/series">Series</Link>
+          <span className={styles.navSep}>/</span>
+          <Link className={styles.navItem} to="/blog/categories">Categories</Link>
+        </nav>
+        
+        {/* Description and newsletter */}
+        <div className={styles.intro}>
+          <p className={styles.description}>
+            Welcome to the DiscoverDev publication! For over an year we have curated the best software engineering articles from across the web, have accumulated thousands of daily website visitors and over 5000 email subscribers. Now we move to the next phase of being a platform where engineers and developers can publish high quality in-depth articles. We want to share our platform and enable developers to reach a wider audience while giving our users the high quality content they're used to!
+            <br/> <br/>
+            This site is run by me Deepak Karki, <a href="https://twitter.com/ioKarki">@ioKarki</a> on Twitter. You can reach out to me there or on the official DiscoverDev twitter handle <a href="https://twitter.com/discoverdev_io">@discoverdev_io</a>.
+          </p>
+          <MiniNewsletter className={styles.newsletter}/>
+        </div>
 
         <h2 className={styles.subTitle}>Latest Posts</h2>
         <PostGrid posts={postNodes}/>
@@ -51,7 +69,6 @@ export default ({ data }) => {
         <h2 className={styles.subTitle}>JS30 Series</h2>
         <PostGrid posts={js30Nodes}/>
         <h3 className={styles.seeMore}><Link to="/blog/series/js30">See all posts in the series &rarr;</Link></h3>
-
         <h2 className={styles.subTitle}>Categories</h2>
         <div className={styles.blogList}>
           {

@@ -34,12 +34,18 @@ Do these after I have a bunch of posts to post. Infact even the categories
 export default ({ data }) => {
   let postNodes = data.allPosts.edges.map( edge => edge.node )
   let js30Nodes = data.js30.edges.map( edge => edge.node )
+  /* 
+  Keep this for later, as of now I don't know a good way to present categories
+  Maybe have a bunch of categories with atleast > 6 posts? OR
+  Just list the categories with description (instead of the category posts)?
+
   let categories = data.allCategories.group.map(category => {
     if(category.fieldValue === 'undefined'){ 
       category.fieldValue = 'uncategorized'
     }
     return category
   })
+  */
 
   return (
     <Layout sidebar={false} wide={true}>
@@ -69,7 +75,9 @@ export default ({ data }) => {
 
         <h2 className={styles.subTitle}>JS30 Series</h2>
         <PostGrid posts={js30Nodes}/>
-        <h3 className={styles.seeMore}><Link to="/blog/series/js30">See all posts in the series &rarr;</Link></h3>
+        <h3 className={styles.seeMore}><Link to="/blog/series/js30">See all posts in this series &rarr;</Link></h3>
+
+        {/* Maybe have categories if there are more than 6 posts in a given category? */}
         {/* <h2 className={styles.subTitle}>Categories</h2>
         <div className={styles.blogList}>
           {

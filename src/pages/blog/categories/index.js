@@ -15,7 +15,10 @@ export default ({ data }) => {
             categories.map(category => (
               <div>
                 <h2 className={styles.subTitle}>{category.fieldValue}</h2>
-                 <PostGrid posts={category.edges.map(edge => edge.node)}/>
+                <PostGrid posts={category.edges.map(edge => edge.node)}/>
+                <h3 className={styles.seeMore}>
+                  <Link to={`/blog/categories/${category.fieldValue}`}>See all posts in this category &rarr;</Link>
+                </h3>
               </div>
             ))
           }
@@ -55,6 +58,7 @@ query {
           frontmatter {
             title
             date(formatString: "DD MMMM, YYYY")
+            desc
           }
           excerpt
         }

@@ -10,7 +10,7 @@ const Pagination = ({totalPages, currentPage, baseUrl}) => {
   let prev = `${baseUrl}/${indexP > 1? indexP:''}`
 
   // if there is only 1 page, wouldn't want `next` to be bseUrl/1
-  let cp = currentPage==1 ? '':currentPage
+  let cp = currentPage === 1? '':currentPage
   let next = `${baseUrl}/${indexN > totalPages? cp:indexN}`
 
 

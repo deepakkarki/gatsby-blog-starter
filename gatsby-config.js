@@ -99,12 +99,12 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.edges.map(edge => {
-                return Object.assign({}, edge.node.frontmatter, {
-                  description: edge.node.excerpt,
-                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  custom_elements: [{ "content:encoded": edge.node.html }],
+              return allMarkdownRemark.edges.map(({node}) => {
+                return Object.assign({}, node.frontmatter, {
+                  description: node.frontmatter.desc || node.excerpt,
+                  url: site.siteMetadata.siteUrl + node.fields.slug,
+                  guid: site.siteMetadata.siteUrl + node.fields.slug,
+                  custom_elements: [{ "content:encoded": node.html }],
                 })
               })
             },
@@ -138,6 +138,7 @@ module.exports = {
         ],
       },
     },
+
     {
       resolve: `gatsby-plugin-feed`,
       options: {
@@ -155,45 +156,64 @@ module.exports = {
         `,
         feeds: [
           {
-            serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.edges.map(edge => {
-                return Object.assign({}, edge.node.frontmatter, {
-                  description: edge.node.excerpt,
-                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  custom_elements: [{ "content:encoded": edge.node.html }],
+            serialize: ({ query: { site, allLinksJson } }) => {
+              return allLinksJson.edges.map(({node}) => {
+                return Object.assign({}, {
+                  title: `DiscoverDev links for ${node.date}`,
+                  //TODO - should I call LinkList for desc or in custom element?
+                  description: `Curated links for <a href="${site.siteMetadata.siteUrl + `/archive/${node.date}`}" ${node.date} </a>`,
+                  url: site.siteMetadata.siteUrl + `/archive/${node.date}`,
+                  guid: site.siteMetadata.siteUrl + node.date,
+                  custom_elements: [{ "content:encoded": LinkList(node.links)}],
                 })
               })
             },
             query: `
               {
-                allMarkdownRemark(
-                  limit: 1000,
-                  sort: { order: DESC, fields: [frontmatter___date] },
-                  filter: {
-                    frontmatter: { published: { eq: true }, type: {ne: "page"} }
-                    fileAbsolutePath: {regex: "${__dirname}/src/pages/blog2//"}
-                  }
-                ) {
-                  edges {
-                    node {
-                      excerpt
-                      html
-                      fields { slug }
-                      frontmatter {
-                        title
-                        date
-                      }
+                allLinksJson(
+                limit: 50
+                sort: {fields :[date], order:DESC}
+              ){
+                edges{
+                  node{
+                    date
+                    links{
+                      title
+                      domain
+                      tags
+                      url
                     }
                   }
                 }
               }
+            }
             `,
-            output: "/blog2/rss.xml",
-            title: "Blog2 RSS Feed",
-          },
+            output: "/rss.xml",
+            title: "DiscoverDev RSS Feed",
+          }
         ],
       },
     },
   ],
 }
+
+
+const LinkList = (links) => (
+  `<ul>
+    ${links.map(link =>(
+      `<li>
+        <h3>
+          <a href=${link.url} target="_blank">${link.title}</a>
+        </h3>
+        <span> <i>(${link.domain})</i> </span>
+        <p>
+          ${
+            link.tags.map(tag => (
+              `<span><i>#${tag}</i></span>`
+            ))
+          }
+        </p>
+      </li>`
+    ))}
+  </ul>`
+)

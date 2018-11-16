@@ -28,7 +28,13 @@ const Layout = ({ children, sidebar=true, wide=false }) => (
             { name: 'keywords', content: 'developer, web, frontend, javascript' },
           ]}
         >
-          <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet"/>
+          <meta property="og:title" content="DiscoverDev | Daily digest of engineering blog posts for software developers" />
+          <meta property="og:image" content="https://i.lensdump.com/i/uYTND.png" />
+
+          {/* Following 3 meta properties may have to be overwritten by specific templates */}
+          <meta property="og:type" content="website"/>
+          <meta property="og:url" content="https://discoverdev.io"/>
+          <meta property="og:description" content="Checkout awesome engineering blog posts from across the internet, covering systems, data science, hardware, web and more! Curated and delivered every weekday!"/>
           <html lang="en" />
         </Helmet>
 

@@ -1,8 +1,13 @@
-module.exports = {
+let activeEnv = process.env.ACTIVE_ENV || process.env.NODE_ENV || "development"
 
+require("dotenv").config({
+  path: `.env.${activeEnv}`,
+})
+
+module.exports = {
   siteMetadata: {
     title: `DiscoverDev`,
-    siteUrl:`http://localhost:8000`,
+    siteUrl: process.env.SITE_URL,
     description:`Discover Dev`,
     navItems: [
       {name: "Archive", url: "/archive"},
@@ -16,13 +21,6 @@ module.exports = {
         name : "blog #1",
         //relative to "/src/pages/"
         path: "blog",
-
-        //apparently gatsby *sucks* at querying filesystem
-        // so need to list the series myself
-        series:[
-          "js30",
-          "jsFoo"
-        ]
       },
     ],
   },

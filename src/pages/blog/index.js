@@ -58,20 +58,10 @@ export default ({ data }) => {
           <span className={styles.navSep}>/</span>
           <Link className={styles.navItem} to="/blog/categories">Categories</Link>
         </nav>
-        
-        {/* Description and newsletter */}
-        <div className={styles.intro}>
-          <p className={styles.description}>
-            Welcome to the DiscoverDev publication! For over an year we have curated the best software engineering articles from across the web, have accumulated thousands of daily website visitors and over 5000 email subscribers. Now we move to the next phase of being a platform where engineers and developers can publish high quality in-depth articles. We want to share our platform and enable developers to reach a wider audience while giving our users the high quality content they're used to!
-            <br/> <br/>
-            This site is run by me Deepak Karki, <a href="https://twitter.com/ioKarki">@ioKarki</a> on Twitter. You can reach out to me there or on the official DiscoverDev twitter handle <a href="https://twitter.com/discoverdev_io">@discoverdev_io</a>.
-          </p>
-          <MiniNewsletter className={styles.newsletter}/>
-        </div>
-
         <h2 className={styles.subTitle}>Latest Posts</h2>
         <PostGrid posts={postNodes}/>
         <h3 className={styles.seeMore}><Link to="/blog/posts">See all posts in the blog &rarr;</Link></h3>
+        <MiniNewsletter className={styles.newsletter}/>
 
         <h2 className={styles.subTitle}>JS30 Series</h2>
         <PostGrid posts={js30Nodes}/>

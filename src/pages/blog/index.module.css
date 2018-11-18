@@ -32,7 +32,8 @@
 
 .newsletter{
   flex: 1 1 40%;
-  min-width: 340px;
+  max-width: 700px;
+  margin: 3em auto;
   margin-top: 3em;
 }
 
@@ -45,7 +46,7 @@
   padding-bottom: 1rem;
   border-bottom: 2px solid #333;
   font-size: 2em;
-  margin-top: 3em;
+  margin-top: 3rem;
   margin-bottom: 1.25em;
 }
 

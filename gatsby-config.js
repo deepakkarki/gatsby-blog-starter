@@ -1,5 +1,7 @@
 let activeEnv = process.env.ACTIVE_ENV || process.env.NODE_ENV || "development"
 
+console.log("ACTIVE_ENV", activeEnv)
+
 require("dotenv").config({
   path: `.env.${activeEnv}`,
 })
@@ -40,7 +42,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `data`,
-        path: `../links/`,
+        path: `../data/links/`,
         ignore: [`**/\.*`], // ignore files starting with a dot
       },
     },
@@ -49,7 +51,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `tags`,
-        path: `../tags/`,
+        path: `../data/tags/`,
         ignore: [`**/\.*`], // ignore files starting with a dot
       },
     },

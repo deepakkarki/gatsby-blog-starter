@@ -18,7 +18,7 @@ import PostGrid from "../../../components/post-grid/post-grid"
 export default ({ data }) => {
   let seriesNameMap = {
     "js30" : "JS 30",
-    "jsFoo" : "JS FOO"
+    // "jsFoo" : "JS FOO"
   }
   return (
     <Layout>
@@ -55,6 +55,7 @@ export const seriesIndexFragment = graphql`
         frontmatter {
           title
           date(formatString: "DD MMMM, YYYY")
+          desc
         }
         excerpt
       }
@@ -96,6 +97,5 @@ export const jsFooFragment = graphql`
 export const categoryListQuery = graphql`
 query {
   ...js30
-  ...jsFoo
 }
 `

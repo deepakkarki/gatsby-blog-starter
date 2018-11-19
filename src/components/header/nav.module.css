@@ -38,6 +38,7 @@
 
 .navItem a{
   color: black;
+  font-size: 19px;
   transition: all ease-in-out .3s;
   padding-bottom: 4px;
   padding-right: 2px;

@@ -6,7 +6,13 @@ import { StaticQuery, graphql } from 'gatsby'
 import Header from './header/header.js'
 import Newsletter from './newsletter/newsletter.js'
 import styles from './layout.module.css'
+import MiniNewsletter from "./newsletter/mini-newsletter.js"
 
+let sideBarSelect = {
+  "none" : null,
+  "full" : <Newsletter/>,
+  "mini" : <MiniNewsletter className={styles.newsletter}/>,
+}
 
 const Layout = ({ children, sidebar=true, wide=false }) => (
   <StaticQuery
@@ -44,6 +50,8 @@ const Layout = ({ children, sidebar=true, wide=false }) => (
           <div className={styles.contentWrapper} style={wide?{maxWidth:"unset"}:null}>
             {children}
           </div>
+          {/* {sideBarSelect[sidebar]} */}
+          {/* {sidebar? <MiniNewsletter className={styles.newsletter}/>: null} */}
           {sidebar? <Newsletter/>: null}
         </div>
         <footer className={styles.footer}>

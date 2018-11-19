@@ -66,3 +66,11 @@
 .ghostFooter{
   height: 100px;
 }
+
+.newsletter{
+  max-width: 340px;
+  margin: 3em auto;
+  margin-top: 3em;
+  align-self: flex-start;
+  max-width: 320px;
+}

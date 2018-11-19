@@ -29,6 +29,14 @@ Do these after I have a bunch of posts to post. Infact even the categories
   for the `.bodyWrapper` fixes the issue! Makes no sense :(
   I Should just re-learn Flexbox, overflow and other CSS stuff properly
   and retry.
+
+ALSO NOTE : Should not have more than 12 categories. 
+Actually it will turn out to be more. Keep it high level : 
+  data-science, kernel/lowlevel, hardware, security, javascript, frontend, 
+  distributed-systems, DBMS, "compilers+runtime", backend, devops, networking
+
+I believe keeping it high level would help me list it out better, having more 
+articles under each category + have good descriptions. But it won't be easy.
 */ 
 
 export default ({ data }) => {

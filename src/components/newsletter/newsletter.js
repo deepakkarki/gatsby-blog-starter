@@ -14,7 +14,6 @@ const Newsletter = () => (
       <input type="hidden" name="id" value="6aab40a607"/>
       <input type="email" autoCapitalize="off" autoCorrect="off" name="MERGE0" id="MERGE0" 
               className={styles.email} size="25" placeholder="Email"/>
-      <br/>
       <input type="submit" className={styles.submit} value="Subscribe"/>
     </form>
     <p className={styles.privacy}>

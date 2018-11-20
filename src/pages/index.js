@@ -4,12 +4,15 @@ import Layout from '../components/layout'
 import LinkList from '../components/link-list/link-list'
 
 import styles from './index.module.css'
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 
 const IndexPage = ({data}) => {
   let nodes = data.allLinksJson.edges.map(edge => edge.node)
   return(
     <Layout>
+      <p className={styles.intro}>
+        <b>DiscoverDev brings you a daily digest of the best engineering blogs from across the web! We also run a <Link to="/blog">engineering blog</Link> for developers! Join us and thousands of fellow developers - <Link to="/subscribe">Subscribe</Link> to our mailing list, follow us on <a href="https://twitter.com/discoverdev_io" rel="noopener noreferrer" target="_blank">Twitter</a> or tap into our <Link to="/rss.xml">RSS feed</Link>!</b>
+      </p>
       {
         nodes.map( (node,i) => (
           <div key={i} className={styles.dayList}>

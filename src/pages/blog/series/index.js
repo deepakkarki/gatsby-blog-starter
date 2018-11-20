@@ -43,6 +43,8 @@ export default ({ data }) => {
   )
 }
 
+// Actually I don't think any of this is required.
+// Just get it in gatsby-node.js and give it here via pageContext
 // this will remain more or less constant.
 export const seriesIndexFragment = graphql`
   fragment seriesIndex on MarkdownRemarkConnection {

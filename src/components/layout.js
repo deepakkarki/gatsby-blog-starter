@@ -7,6 +7,7 @@ import Header from './header/header.js'
 import Newsletter from './newsletter/newsletter.js'
 import styles from './layout.module.css'
 import MiniNewsletter from "./newsletter/mini-newsletter.js"
+import favicon from '../images/dd-logo.ico'
 
 let sideBarSelect = {
   "none" : null,
@@ -34,6 +35,8 @@ const Layout = ({ children, sidebar=true, wide=false }) => (
             { name: 'keywords', content: 'developer, web, frontend, javascript' },
           ]}
         >
+          <link rel="icon" type="image/x-icon" href={favicon} />
+          <link rel="shortcut icon" type="img/ico" href={favicon} />
           <meta property="og:title" content="DiscoverDev | Daily digest of engineering blog posts for software developers" />
           <meta property="og:image" content="https://i.lensdump.com/i/uYTND.png" />
 

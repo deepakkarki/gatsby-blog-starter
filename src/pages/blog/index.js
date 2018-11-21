@@ -135,7 +135,7 @@ export const query = graphql`
         type: {ne: "page"}
       }
     }
-    sort: { fields: [frontmatter___date], order: DESC }
+    sort: { fields: [frontmatter___part, frontmatter___date], order: DESC }
     limit: 6
   ){
     edges{
@@ -172,8 +172,8 @@ export const query = graphql`
       limit: 2
     ){
         totalCount
-  	    fieldValue
-      	edges{
+        fieldValue
+        edges{
           node{
             id
             fields{

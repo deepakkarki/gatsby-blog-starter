@@ -75,7 +75,7 @@ export const js30Fragment = graphql`
         fileAbsolutePath: {regex: "/src/pages/blog/series/js30//"}
         frontmatter:{published: {eq : true}, type: {ne: "page"}}
       }
-      sort: { fields: [frontmatter___date], order: DESC }, limit: 4
+      sort: { fields: [frontmatter___part, frontmatter___date], order: DESC }, limit: 4
       ){
         ...seriesIndex
       }
@@ -89,7 +89,7 @@ export const jsFooFragment = graphql`
         fileAbsolutePath: {regex: "/src/pages/blog/series/jsFoo//"}
         frontmatter:{published: {eq : true}, type: {ne: "page"}}
       }
-      sort: { fields: [frontmatter___date], order: DESC }, limit: 4
+      sort: { fields: [frontmatter___part, frontmatter___date], order: DESC }, limit: 4
       ){
         ...seriesIndex
       }

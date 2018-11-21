@@ -24,7 +24,7 @@ export const seriesListQuery = graphql`
   query seriesListQuery($skip: Int!, $limit: Int!, $seriesPath: String!, $filePath: String!) {
 
     allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { fields: [frontmatter___part, frontmatter___date], order: DESC }
       limit: $limit
       skip: $skip
       filter: {

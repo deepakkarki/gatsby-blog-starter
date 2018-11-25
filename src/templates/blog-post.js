@@ -8,7 +8,12 @@ export default ({ data }) => {
   return (
     <Layout>
       <div>
-        <h1>{post.frontmatter.title}</h1>
+        <h1 style={{
+              fontSize: "3em",
+              paddingBottom: "10px",
+              borderBottom: "2px solid black"}}>
+          {post.frontmatter.title}
+        </h1>
         {
           renderAst(post.htmlAst)
         }

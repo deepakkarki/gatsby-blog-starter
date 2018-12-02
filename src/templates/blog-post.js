@@ -2,21 +2,24 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import {renderAst} from "../../rehype-settings"
+import styles from './blog-post.module.css'
+import 'katex/dist/katex.min.css'
 
-export default ({ data }) => {
-  const post = data.markdownRemark
+
+export default ({ data : {markdownRemark:mkd} }) => {
+  const fm = mkd.frontmatter
   return (
     <Layout>
       <div>
-        <h1 style={{
-              fontSize: "3em",
-              paddingBottom: "10px",
-              borderBottom: "2px solid black"}}>
-          {post.frontmatter.title}
+        <h1 className={styles.header}>
+          {fm.title}
         </h1>
-        {
-          renderAst(post.htmlAst)
-        }
+        <p className={styles.author}>
+          By {fm.author.name}, on {fm.date}
+        </p>
+        <div className={styles.content}>
+          { renderAst(mkd.htmlAst) }
+        </div>
       </div>
     </Layout>
   )
@@ -28,6 +31,10 @@ export const query = graphql`
       htmlAst
       frontmatter {
         title
+        author{
+          name
+        }
+        date(formatString: "DD MMMM YYYY")
       }
     }
   }

@@ -1,0 +1,53 @@
+.header {
+  font-size: 3em;
+  padding-bottom: 10px;
+}
+
+.author{
+  border-bottom: 2px solid black;
+  max-width: 720px;
+  padding-bottom: 1em;
+  font-style: italic;
+  color: #6b6b6b;
+  font-size: 16px;
+  word-spacing: -2px;
+}
+
+.content{
+  line-height: 1.6;
+  font-size: 17.5px;
+  color: #335;
+  max-width: 720px;
+}
+
+.content div > p{
+  margin-bottom: 2.25em;
+}
+
+.content img{
+  margin: auto;
+  display: block;
+}
+
+/* Code blocks */
+.content pre[class*="language-"] {
+  margin: 2.5em 0;
+  border: 1px solid #697b82;
+}
+
+/* Inline code */
+.content :not(pre) > code[class*="language-"] {
+  padding: 0.2em 0.3em;
+}
+
+.content .footnotes{
+  font-size: 15px;
+}
+
+.content .footnotes li{
+  margin-bottom: 1em;
+}
+
+.content .footnotes li p {
+  margin-bottom: 0;
+}

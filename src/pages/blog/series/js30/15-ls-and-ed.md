@@ -92,7 +92,7 @@ Main steps involved to complete our app
 * Save the list to local storage
 
 
-## Adding new items
+### Adding new items
 
 We add new items using a html form. Submitting a form by default makes a get request and goes to the new URL. We call `e.preventDefault()` to prevent the default behavior.
 
@@ -119,7 +119,7 @@ addItems.addEventListener('submit', addItem);
 In `addItem()`, `this` refers to the `form.add-items` DOM object. We then select the text input element and get the text inside of it. We create a new items object and then push it into the items list. Once it is added we call `reset()` on the form to clear the input text box.
 
 
-## Display the items
+### Display the items
 
 `populateList()` does the work of taking in an array and displaying the list. We could have `populateList()` just use the global `items` and `itemsList` variables, but that would be hardcoding, it's better to pass the variables in case we ever want to use the functions for anything else.
 
@@ -147,7 +147,7 @@ function addItem(e){
 `populateList()` uses template strings and `[].map` to create `<li>` elements from each element in the array, which is late concatenated into one string which `platesList.innerHTML` is set to. `addItem` uses `populateList` to render all the current items.
 
 
-## Toggle an item
+### Toggle an item
 
 `toggleDone` deals with the click event to toggle an item. We can attach a listener on the checkbox element, but the moment we add a new item, all `<li>` elements are recreated by `populateList`. Hence adding an event listener on those items makes no sense. We solve this issue by using event delegation - we let the parent element take care of the click event to toggle an item. The parent in this case is the `ul.item-plates` element.
 
@@ -172,7 +172,7 @@ Here is the code up until this point
 </iframe>
 
 
-## Save the list to LocalStorage
+### Save the list to LocalStorage
 
 We want to persist the list after a refresh or for a later point in time, for this we'll use local storage. Local storage is a key value store where the key and value are strings. 
 

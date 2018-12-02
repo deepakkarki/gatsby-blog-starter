@@ -43,7 +43,7 @@ These are just three nested boxes. We'll select them in the `divs` variable.
 const divs = document.querySelectorAll('div')
 ```
 
-## Bubbling
+### Bubbling
 
 ```js
 function bubbles(e){
@@ -66,7 +66,7 @@ divs.forEach(div => div.addEventListener('click', bubbles))
 As we can see, the target is always the third div (inner most box), but click is triggered for each div. This is due to bubbling - where the event bubbles up to the parent. 
 
 
-## Capturing
+### Capturing
 
 ```js
 function captures(e){
@@ -124,7 +124,7 @@ divs.forEach(div => div.addEventListener('click', logAll, {capture:true}))
 Hopefully the above example helps you visualize what is happening! The `phase` object is derived from the phase to number mapping on [this page](https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase).
 
 
-## Stop Propagation
+### Stop Propagation
 
 `Event.stopPropagation()` Prevents further propagation of the current event in the capturing and bubbling phases.
 
@@ -148,7 +148,7 @@ divs.forEach(div => div.addEventListener('click', logEv))
 The event is no longer bubbled. The effect will be similar if done during the capture phase.
 
 
-## Trigger once
+### Trigger once
 
 When we want an event to trigger only once,
 

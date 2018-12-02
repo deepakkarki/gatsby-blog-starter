@@ -61,7 +61,7 @@ Main steps involved in creating the player :
 8. Seek a position in the video by clicking/dragging on the progress bar
 
 
-## Get all the elements
+### Get all the elements
 
 ```js
 const player = document.querySelector('.player');
@@ -76,7 +76,7 @@ const ranges = player.querySelectorAll('.player__slider');
 You can read more about the [video element](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement) or preferably the [Media element](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement) it inherits from. We'll be using the JS properties quite a bit. If you also fancy a tutorial about the video element [html5rocks](https://www.html5rocks.com/en/tutorials/video/basics/) has a brilliant one!
 
 
-## Write a function to play/pause
+### Write a function to play/pause
 
 ```js
 function togglePlay() {
@@ -92,7 +92,7 @@ toggle.addEventListener('click', togglePlay);
 This function checks if the video is paused, if so it starts playing it, if not it pauses the playing video. For all the properties and function relating to the video element, please refer to the links to the docs/tutorials I've mentioned above.
 
 
-## Update the play/pause button
+### Update the play/pause button
 
 ```js
 function updateButton() {
@@ -107,7 +107,7 @@ video.addEventListener('pause', updateButton);
 The video can be paused / played by other means than clicking on the video / toggle button. So instead of adding the logic in the `togglePlay` we'll listen to the 'play' and 'pause' events on the video element.
 
 
-## Add the skip forward and backward functionality
+### Add the skip forward and backward functionality
 
 ```js
 function skip() {
@@ -120,7 +120,7 @@ skipButtons.forEach(button => button.addEventListener('click', skip));
 We can change the video time by assigning the new time to `video.currentTime`. The skip time is got from the `data-skip` attribute. So you can go `-10` seconds back in time or skip `25` seconds ahead.
 
 
-## Handle the volume and playback rate change
+### Handle the volume and playback rate change
 
 ```js
 function handleRangeUpdate() {
@@ -141,7 +141,7 @@ Here we exploit the fact that both volume and range playback are slider elements
 Hence we can just use `video[this.name]`, it will resolve to either `video.volume` or `video.playbackRate` based on which element we're sliding. Assigning to `this.value` remains same anyway. This way we don't have to duplicate the code!
 
 
-## Display the video progress
+### Display the video progress
 
 ```js
 function handleProgress() {
@@ -155,7 +155,7 @@ video.addEventListener('timeupdate', handleProgress);
 The yellow bar shows the % of the video that has completed. We attach a 'timeupdate' event listener to the video element, every time it fires the percent is calculated and the progressBar's CSS `flexBasis` property is set!
 
 
-## Seek a position in the video
+### Seek a position in the video
 
 ```js
 function scrub(e) {

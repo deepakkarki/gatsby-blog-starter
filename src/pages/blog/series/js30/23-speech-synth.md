@@ -66,7 +66,7 @@ speechSynthesis.speak(msg)
 Now for the various features of our app!
 
 
-## Get the default text
+### Get the default text
 
 We want the app to speak whatever text we have in the text area, so lets set the initial value of the msg text to that.
 
@@ -75,7 +75,7 @@ msg.text = document.querySelector('[name="text"]').value
 ```
 
 
-## Select a custom voice
+### Select a custom voice
 
 Setting the voice property - we use `voiceschanged` event to listen to when all the voices have been loaded.
 
@@ -114,7 +114,7 @@ We search through the array of voices to find the correct `SpeechSynthesisVoice`
 ```
 
 
-## Rate, pitch, user entered text
+### Rate, pitch, user entered text
 
 Our `options` variable is a NodeList of three elements, the rate, pitch `range` elements and the text area.
 We can deal with all three inputs in one function
@@ -132,7 +132,7 @@ options.forEach(option => option.addEventListener('change', setOption))
 The name of each of the input elements match with the corresponding property name in `msg`, and the value can be extracted in the same way using `this.value`. 
 
 
-## Start and stop the speech
+### Start and stop the speech
 
 We have a start and stop button already, let us write a function to be triggered on click
 

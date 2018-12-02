@@ -47,7 +47,7 @@ Steps to take
 - Add the elements to the `ul#bands`
 
 
-## Call standard sort on the array
+### Call standard sort on the array
 
 First we sort normally, with the articles
 
@@ -58,7 +58,7 @@ const sortedBands = bands.sort((a, b) => a > b ? 1 : -1);
 ```
 
 
-## Function to strip the strings
+### Function to strip the strings
 
 We'll use a RegEx to find any instance of articles (`/i` implies case insensitivity), and reduce them to nothing.
 
@@ -69,13 +69,13 @@ function strip(bandName) {
 ```
 
 
-## Compare the stripped version
+### Compare the stripped version
 
 ```js
 const sortedBands = bands.sort((a, b) => strip(a) > strip(b) ? 1 : -1);
 ```
 
-## Add the elements to the list
+### Add the elements to the list
 
 Map the list data to a list of strings of `"<li>"`'s. Then concatenate them and set them to the inner html of the `<ul>`
 

@@ -53,7 +53,7 @@ To get the text shadow to follow the cursor
 4. Update the text shadow
 
 
-## Adding the event listener
+### Adding the event listener
 
 ```js
 const hero = document.querySelector('.hero');
@@ -67,7 +67,7 @@ function shadow(e) {
 hero.addEventListener('mousemove', shadow);
 ```
 
-## Extract the coordinates
+### Extract the coordinates
 
 The event object's `pageX, pageY` properties give us the X, Y coordinates of the mouse wrt the page. But we need it with respect to the hero element, so we use the `offsetX, offsetY` properties. The [offsetX property](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetX) of the MouseEvent provides the offset in the X coordinate of the mouse pointer between that event and the padding edge of the target node. So incase we're hovering over `h1` and not `div.hero` we have to adjust the x, y values.
 
@@ -84,7 +84,7 @@ function shadow(e) {
 }
 ```
 
-## Map the coordinates to the displacement of the text shadow
+### Map the coordinates to the displacement of the text shadow
 
 Let us assume the range of the displacement of the text shadow to be max of 50px from the actual text.
 
@@ -111,7 +111,7 @@ What we're doing here is simply mapping the range of width to current 'x' and 'y
 Basically, get the fraction, multiply to get the value, shift the origin. `x/width` give us the fraction, multiplying by `range` gives us the value, but we need to subtract `range/2` since the displacement is from the center of `h1` (origin is here, not top of screen) and going to the left would mean a negative value for x. Same applies for y.
 
 
-## Update the text shadow
+### Update the text shadow
 
 ```js
 function shadow(e) {

@@ -20,7 +20,7 @@ You can check out the video here
 
 There isn't much to talk about in this blog post as the video is a random assortment of tricks and tips, so I'll keep is short and simple.
 
-## 1. Debugging
+### 1. Debugging
 
 ```html
 <p onClick="makeGreen()">×BREAK×DOWN×</p>
@@ -37,14 +37,14 @@ If you see some changes on the webpage (eg. an animation) and want to see which 
 
 **The following are variations of `console.logs`**
 
-## 2. Regular
+### 2. Regular
 
 ```js
 console.log('hello');
 ```
 
 
-## 3. Interpolated
+### 3. Interpolated
 
 You can format `console.log` as you would have formatted `printf`
 ```js
@@ -52,7 +52,7 @@ console.log('Hello I am a %s string!', '💩');
 ```
 
 
-## 4. Styled
+### 4. Styled
 
 You can add styles to your logged output in the console.
 
@@ -61,7 +61,7 @@ console.log('%c I am some great text', 'font-size:50px; background:red; text-sha
 ```
 
 
-## 5. warning!
+### 5. warning!
 
 Give a warning level log with a stacktrace.
 ```js
@@ -69,7 +69,7 @@ console.warn('OH NOOO');
 ```
 
 
-## 6. Error :|
+### 6. Error :|
 
 Give an error level log with a stacktrace.
 ```js
@@ -77,7 +77,7 @@ console.error('Shit!');
 ```
 
 
-## 7. Info
+### 7. Info
 
 Give a info level log with no stacktrace.
 ```js
@@ -85,7 +85,7 @@ console.info('Crocodiles eat 3-4 people per year');
 ```
 
 
-## 8. Testing
+### 8. Testing
 
 `console.asset(cond, msg)` takes in a condition expression, which if resolves to true does nothing, but if it is false assert logs an error level message with a stacktrace.
 
@@ -94,14 +94,14 @@ const p = document.querySelector('p');
 console.assert(p.classList.contains('ouch'), 'That is wrong!');
 ```
 
-## 9. clearing
+### 9. clearing
 
 Clears the console area
 ```js
 console.clear();
 ```
 
-## 10. Viewing DOM Elements
+### 10. Viewing DOM Elements
 
 You can see the dom elements, `.dir()` also lets you inspect all the properties of the dom object.
 
@@ -111,7 +111,7 @@ console.dir(p);
 ```
 
 
-## 11. Grouping together
+### 11. Grouping together
 
 You can create groups and log a set of logs under one group.
 
@@ -126,7 +126,7 @@ dogs.forEach(dog => {
 ```
 
 
-## 12. counting
+### 12. counting
 
 You can count how many times a particular output has been logged.
 
@@ -147,7 +147,7 @@ console.count('Steve');
 // Steve: 3
 ```
 
-## 13. Timing
+### 13. Timing
 
 You can calculate the time for a certain operation using `console.time` and `console.timeEnd`. As far as the strings passed to the calls are the same, it calculates the time between `time` and `timeEnd`. 
 
@@ -165,7 +165,7 @@ fetch('https://api.github.com/users/wesbos')
 // {login: "wesbos", id: ..., …}
 ```
 
-## 14. Table
+### 14. Table
 
 If you have an array of objects with the same property, you can print them out in a tabular format.
 

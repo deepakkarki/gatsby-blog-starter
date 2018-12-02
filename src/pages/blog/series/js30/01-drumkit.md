@@ -94,7 +94,7 @@ We can brake the problem into three parts -
 2. Play the corresponding sound on a valid keypress.
 3. Animate the `div.key` element that corresponds to the letter pressed.
 
-## Capture the keystrokes
+### Capture the keystrokes
 
 We can capture keystrokes by adding a `keydown` event listener to the window object.
 
@@ -105,7 +105,7 @@ window.addEventListener('keydown', function(e){
 })
 ```
 
-## Play the audio
+### Play the audio
 
 The event object has a keycode integer, which is the ascii value of the key pressed. This is where the `data-*` property becomes useful, we can select the elements based on keycode.
 
@@ -135,7 +135,7 @@ Here is the codepen up to this point -
 </iframe>
 
 
-## Animate the keys
+### Animate the keys
 
 The animation is done via CSS transitions. In the JS code we just add and remove the class `playing` to create the animation.
 

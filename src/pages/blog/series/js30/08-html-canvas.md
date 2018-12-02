@@ -36,7 +36,7 @@ So let's get started. There are multiple things we need to do in order to obtain
 4. Change the thickness of the line
 
 
-## Initialization
+### Initialization
 
 The handle to manipulate the canvas is `ctx`, the 2D context of the canvas. You have a 3D context for drawing 3D objects.
 
@@ -64,7 +64,7 @@ ctx.lineWidth = 10
 ```
 
 
-## Track user interactions
+### Track user interactions
 
 We need to know when the user has actually clicked on the canvas and is dragging the cursor. For this purpose we'll have a `isDrawing` variable.
 
@@ -87,7 +87,7 @@ canvas.addEventListener('mouseout', () => isDrawing = false);
 So we've done a bunch of things here! The `draw()` function is what actually does the drawing on a `mousemove` event on the canvas, but only if `isDrawing` is true. Now `isDrawing` is set to true when there is a `mousedown` event on the canvas (i.e. we click on the canvas). When we unclick the mouse (`mouseup`) or when we leave the canvas area (`mouseout`), then `isDrawing` is set to false again.
 
 
-## Drawing lines on the canvas
+### Drawing lines on the canvas
 
 
 Here is how drawing a line on the canvas works, let's say you want to draw a line from `(10,10)` to `(50,50)`
@@ -134,7 +134,7 @@ At this point we have a simple drawing canvas! You can see the results below -
 
 Now for the finishing touches! We need to change both the width of the strokes and the color as the user drags on.
 
-## Change the color of the line
+### Change the color of the line
 
 This can be done by changing the `strokeStyle` incrementally inside the `draw()` function. We'll be setting the color in HSL format, that way we can change the color across the RGB spectrum just by adjusting the hue factor.
 
@@ -152,7 +152,7 @@ function draw(e){
 ```
 
 
-## Change the thickness of the line
+### Change the thickness of the line
 
 ```js
 let widthDelta = 1

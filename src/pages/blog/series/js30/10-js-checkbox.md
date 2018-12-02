@@ -59,7 +59,7 @@ Now let's get on with our JS bits! At a high level we have the following steps -
 3. If shift is clicked, run through the list of items and check everything in between
 
 
-## Keep track of latest checked
+### Keep track of latest checked
 
 We'll track the latest checked in `lastChecked`, every time there is a click on a checkbox we'll update the `lastChecked`.
 
@@ -75,7 +75,7 @@ checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck))
 ```
 
 
-## Check for shift
+### Check for shift
 
 We need to check for shift because only if shift is pressed do we want to do a group check of checkboxes.
 
@@ -95,7 +95,7 @@ function handleCheck(e) {
 ```
 
 
-## Run through the list of items
+### Run through the list of items
 
 Now we need to loop through all the items in the inbox until we hit the `lastChecked` checkbox or the checkbox currently being clicked. If we hit `lastChecked` first, then we need to continue checking all boxes till we encounter the current box. If we come across the current box first, then we check until we hit `lastChecked`. Either way we need to check all items in between `lastChecked` and the current item.
 

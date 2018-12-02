@@ -75,7 +75,7 @@ So let's breakdown the steps required to achieve the effect -
 6. Change the position to fit behind the dropdown
 
 
-## Get handle on DOM elements
+### Get handle on DOM elements
 
 ```js
 const triggers = document.querySelectorAll('.cool > li');
@@ -84,7 +84,7 @@ const nav  = document.querySelector('.top');
 ```
 
 
-## Track mouse enter and leave
+### Track mouse enter and leave
 
 ```js
 function handleEnter(){
@@ -98,7 +98,7 @@ triggers.forEach(trigger => trigger.addEventListener('mouseleave', handleLeave))
 We add the `mouseenter` and `mouseleave` event listeners on the `<li>` elements since we don't want to 
 
 
-## Show dropdown on mouse enter/leave
+### Show dropdown on mouse enter/leave
 
 We use the `trigger-enter` and `trigger-enter-active` CSS classes to get our desired effect. These classes are added to the `<li>` elements holding the dropdown.
 
@@ -136,7 +136,7 @@ setTimeout(() => this.classList.contains('trigger-enter') && this.classList.add(
 Now the callback check whether the `trigger-enter` class exists, only then does it add `trigger-enter-active`.
 
 
-## Show the background highlight
+### Show the background highlight
 
 To the `div.dropdownBackground` element add the `open` class to make it visible, remove it to make it disappear! Open just makes the `opacity : 1`, which is otherwise zero.
 
@@ -149,7 +149,7 @@ background.classList.remove('open')
 ```
 
 
-## Change the width of highlight
+### Change the width of highlight
 
 ```js
 function handleEnter(){
@@ -170,7 +170,7 @@ function handleEnter(){
 We get the dimensions of the dropdown corresponding to the element we're hovering over (`this`) and then set the dimensions of our background to the same value.
 
 
-## Change the position
+### Change the position
 
 ```js
 function handleEnter(){

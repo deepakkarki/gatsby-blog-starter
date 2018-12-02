@@ -39,7 +39,7 @@ const comments = [
 ];
 ```
 
-## Array.prototype.some()
+### Array.prototype.some()
 
 The `[].some(test_fn)` method tests whether at least one element in the array passes the test implemented by the provided function (`test_fn`). Each element of the array is iterated upon and the element is passed to `test_fn`, if it returns true for any one of the elements, the `[].some()` method ends and returns true. If `test_fn` returns false for each element, only then does `[].some()` return false. 
 
@@ -56,7 +56,7 @@ console.log(res) //true
 ```
 
 
-## Array.prototype.every()
+### Array.prototype.every()
 
 The `[].every(test_fn)` method tests whether all elements in the array passes the test implemented by the provided function (`test_fn`). Each element of the array is iterated upon and the element is passed to `test_fn`, if it returns true for each one of the elements, the `[].every()` method returns true. If `test_fn` returns false for even element, `[].every()` returns false.
 
@@ -73,7 +73,7 @@ console.log(res) //false
 ```
 
 
-## Array.prototype.find()
+### Array.prototype.find()
 
 The `[].find(test_fn)` method returns the value of the first element in the array that satisfies the provided testing function (`test_fn`). Otherwise undefined is returned. This works like `[].some()`, except that it returns the first instance of the object rather than true or false.
 
@@ -87,7 +87,7 @@ console.log(com) // { text: 'Super good', id: 823423 }
 ```
 
 
-## Array.prototype.findIndex()
+### Array.prototype.findIndex()
 
 The `[].findIndex(test_fn)` method returns the index of the first element in the array that satisfies the provided testing function (`test_fn`). Otherwise -1 is returned. Works just like `[].find()`, except it returns the index, not the element.
 

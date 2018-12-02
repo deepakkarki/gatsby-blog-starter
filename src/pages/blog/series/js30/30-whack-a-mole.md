@@ -69,7 +69,7 @@ The `Math.random()` function returns a floating-point, pseudo-random number in t
 
 We'll be using `Math.random` a lot, see the [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) for more.
 
-## Random amount of time
+### Random amount of time
 
 ```js
 function randomTime(min, max) {
@@ -80,7 +80,7 @@ function randomTime(min, max) {
 Get a random amount of time between min and max time. For our app, min and max represent milliseconds.
 
 
-## Random hole
+### Random hole
 
 `randomHole()` returns a random hole DOM element.
 
@@ -101,7 +101,7 @@ function randomHole(holes) {
 We pick an index (`idx`) between 0 and 5, viz the range of valid indices of holes array. If the hole is the same as the last one picked, we just call the function again. We store the most recent hole chosen in the `lastHole` variable.
 
 
-## Making the mole appear and disappear
+### Making the mole appear and disappear
 
 `peep()` makes a mole appear and disappear for a random amount of time in a random hole.
 
@@ -119,7 +119,7 @@ function peep() {
 Once we pick the random time period (between 200ms and 1s) and hole, we add the `up` class to the hole element, then register a callback to remove the `up` class after the given period of time.
 
 
-## Starting the game loop
+### Starting the game loop
 
 We start the game when the start button (`<button onClick="startGame()">Start!</button>`) is clicked.
 
@@ -147,7 +147,7 @@ if (!timeUp) peep();
 `peep()` calls itself if the game is running!
 
 
-## scoring mechanism
+### scoring mechanism
 
 The `bonk()` function tracks the hits and updates the score
 

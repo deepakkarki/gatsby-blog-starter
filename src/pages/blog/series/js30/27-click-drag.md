@@ -45,7 +45,7 @@ Steps to reach our desired effect -
 4. Update the scroll position
 
 
-## Detect mouse events
+### Detect mouse events
 
 We want to detect the drag only on the items div. `mousedown` we detect the click, `mouseup` to detect the release of the click. We only want to detect `mousemove` when the mouse has been clicked inside `div.items`. So when the user moves out of the items div, we set `isDown` to false.
 
@@ -81,7 +81,7 @@ slider.addEventListener('mousemove', (e) => {
 We also add the `active` class to `div.items` when the drag is enabled (i.e. `isDown == true`). The class highlights the background a little bit, changes the cursor, and makes the element slightly bigger. 
 
 
-## Get initial data
+### Get initial data
 
 The moment the user clicks anywhere on the slider, we record the current X position (`e.pageX`) and the current Y scroll (`scrollLeft`).
 
@@ -100,7 +100,7 @@ slider.addEventListener('mousedown', (e) => {
 These values will be useful to move the scroll when there is a drag.
 
 
-## Track the drag and update scroll
+### Track the drag and update scroll
 
 ```js
 slider.addEventListener('mousemove', (e) => {

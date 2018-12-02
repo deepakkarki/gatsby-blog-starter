@@ -45,7 +45,7 @@ The `<ul>` represents the playlist, each `<li>` is a video item. The `data-time`
 4. Display the total time in "hh:mm:ss" format
 
 
-## Extract times from items
+### Extract times from items
 
 We use `Array.from` to create an array object from the NodeList object `document.querySelectorAll` gives us.
 Then we map the array to the `data-time` value of each element to get an array of times in strings.
@@ -55,7 +55,7 @@ const items = Array.from(document.querySelectorAll('.videos li'))
 const times = items.map(item => item.dataset.time)
 ```
 
-## Convert string array into seconds array
+### Convert string array into seconds array
 
 We use map to convert each string into an integer which represents the time of the video in seconds.
 
@@ -69,7 +69,7 @@ const seconds = times.map(time => {
 If we have something like `'4:30'`, it is split into `["4", "30"]` and we convert it into numbers with `parseFloat()`. We capture the minutes and seconds in `min, sec` by ES6 destructuring.
 
 
-## Add all the seconds
+### Add all the seconds
 
 We use reduce to add all the time in seconds to get the total time in seconds.
 
@@ -78,7 +78,7 @@ let totalSec = seconds.reduce((sum, time) => sum + time)
 ```
 
 
-## Display the total time
+### Display the total time
 
 We have to split the time in sec to hours, minutes and seconds. `totalSec` is the time we have in seconds, assume it's equal to `125`. First let's shave off the whole minutes from the seconds - `totalSec % 60` gives us the reminder of seconds once we have divided by 60 (we use 60 since one min has 60 sec). `125 % 60` will give us 5. Now `totalMin` is the number of whole minutes we have, that is `(125-5) / 60` viz 2 minutes. We repeat a similar process for hours - shave off any extra minutes and divide by 60 to get the whole hours. Try it out with a bigger number (greater than 3600, since there are 3600 secs in an hour).
 

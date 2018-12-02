@@ -57,7 +57,7 @@ function debounce(func, wait = 20, immediate = true) {
 Now the code we have to write,
 
 
-## Capture scroll data
+### Capture scroll data
 
 ```js
 const sliderImages = document.querySelectorAll('.slide-in')
@@ -84,7 +84,7 @@ All the images we want to animate have `.slide-in` property.
 The property ensures that the image is completely transparent and has a `0.5s` transition. Based on whether the image is to the left or right it has a slight offset (left is moved further left, right further right).
 
 
-## Calculate the positions
+### Calculate the positions
 
 The image should disappear once the half point of the image scrolls into view, or when the image scrolls out of view from the top. `window.scrollY` gives us the number of px scrolled beyond the top. If you haven't scrolled at all, it'll be zero. `window.innerHeight` gives us the height of the viewport. So `scrollY + innerHeight` gives us the number of px that has come into the viewport (or scrolled past it). `sliderImage.height` is the height of the image.
 

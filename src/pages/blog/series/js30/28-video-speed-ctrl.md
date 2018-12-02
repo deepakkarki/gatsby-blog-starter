@@ -61,7 +61,7 @@ speed.addEventListener('mousemove', handleMove)
 The `handleMove` function does two things - changes the height of `div.speed-bar` and changes the playback rate of the video.
 
 
-## Changing the speed bar height
+### Changing the speed bar height
 
 ```js
 function handleMove(e) {
@@ -78,7 +78,7 @@ function handleMove(e) {
 4. Set the `speed-bar` to that height. `bar.style.height = height`
 
 
-## Changing the playback rate
+### Changing the playback rate
 
 ```js
 // in handleMove()

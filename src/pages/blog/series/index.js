@@ -17,22 +17,23 @@ import PostGrid from "../../../components/post-grid/post-grid"
 
 export default ({ data }) => {
   let seriesNameMap = {
-    "js30" : "JS 30",
-    // "jsFoo" : "JS FOO"
+    // fragmentName : [name, url]
+    "js30" : ["JS 30", "js30"], 
+    "twoBit" : ["Two Bit History", "2bithistory"]
   }
   return (
     <Layout>
       <div>
         <h1>Series</h1>
         {
-          Object.entries(seriesNameMap).map(([series, name])=>{
+          Object.entries(seriesNameMap).map(([series, [name, url]])=>{
             let nodes = data[series].edges.map( edge => edge.node )
             return (
             <div>
               <h2>{name}</h2>
               <PostGrid posts={nodes}/>
               <h3 className={styles.seeMore}>
-                <Link to={`/blog/series/${series}`}>See all posts in the series &rarr;</Link>
+                <Link to={`/blog/series/${url}`}>See all posts in the series &rarr;</Link>
               </h3>
             </div>
             )
@@ -59,7 +60,6 @@ export const seriesIndexFragment = graphql`
           date(formatString: "DD MMMM, YYYY")
           desc
         }
-        excerpt
       }
     }
   }
@@ -75,21 +75,21 @@ export const js30Fragment = graphql`
         fileAbsolutePath: {regex: "/src/pages/blog/series/js30//"}
         frontmatter:{published: {eq : true}, type: {ne: "page"}}
       }
-      sort: { fields: [frontmatter___part, frontmatter___date], order: DESC }, limit: 4
+      sort: { fields: [frontmatter___part], order: DESC }, limit: 6
       ){
         ...seriesIndex
       }
   }
 `
 
-export const jsFooFragment = graphql`
-  fragment jsFoo on Query {
-    jsFoo: allMarkdownRemark(
+export const twoBitFragment = graphql`
+  fragment twoBit on Query {
+    twoBit: allMarkdownRemark(
       filter: {
-        fileAbsolutePath: {regex: "/src/pages/blog/series/jsFoo//"}
+        fileAbsolutePath: {regex: "/src/pages/blog/series/2bithistory//"}
         frontmatter:{published: {eq : true}, type: {ne: "page"}}
       }
-      sort: { fields: [frontmatter___part, frontmatter___date], order: DESC }, limit: 4
+      sort: { fields: [frontmatter___date], order: DESC }, limit: 6
       ){
         ...seriesIndex
       }
@@ -99,5 +99,6 @@ export const jsFooFragment = graphql`
 export const categoryListQuery = graphql`
 query {
   ...js30
+  ...twoBit
 }
 `

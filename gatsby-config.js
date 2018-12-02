@@ -65,7 +65,8 @@ module.exports = {
             options: {
               showLineNumbers: false,
             }
-          }
+          },
+          `gatsby-remark-katex`,
         ]
       }
     },

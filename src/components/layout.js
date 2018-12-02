@@ -9,6 +9,7 @@ import styles from './layout.module.css'
 import MiniNewsletter from "./newsletter/mini-newsletter.js"
 import favicon from '../images/dd-logo.ico'
 
+// eslint-disable-next-line
 let sideBarSelect = {
   "none" : null,
   "full" : <Newsletter/>,

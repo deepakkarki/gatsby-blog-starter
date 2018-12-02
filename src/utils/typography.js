@@ -39,7 +39,9 @@ parnassusTheme.overrideThemeStyles = ({adjustFontSizeTo, rhythm}, options, style
         ...adjustFontSizeTo('17px'),
         fontStyle: 'italic',
         borderColor: 'none',
-        borderLeft: `${rhythm(3/16)} solid blue`,
+        borderLeft: `${rhythm(3/16)} solid #335`,
+        paddingTop: '0.5em',
+        paddingBottom: '0.5em',
     },
     'blockquote > :last-child': {
         marginBottom: 0,
@@ -50,11 +52,6 @@ parnassusTheme.overrideThemeStyles = ({adjustFontSizeTo, rhythm}, options, style
         color: 'blue',
         backgroundColor: 'inherit',
     },
-
-    // DAMMIT THIS GETS OVER WRITTEN
-    ':not(pre) > code[class="language-text"]': {
-      padding: '0.2em 0.3em',
-    }
   }
 }
 

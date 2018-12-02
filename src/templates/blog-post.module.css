@@ -1,5 +1,5 @@
 .header {
-  font-size: 3em;
+  font-size: 2.5em;
   padding-bottom: 10px;
 }
 
@@ -20,6 +20,11 @@
   max-width: 720px;
 }
 
+.content h2{
+  border-bottom: 1px solid #808080c7;
+  padding-bottom: 0.4em;
+}
+
 .content div > p{
   margin-bottom: 2.25em;
 }
@@ -29,25 +34,39 @@
   display: block;
 }
 
+/* Stupid hack to get past CSS module class name mangling :( 
+  if kept as `.katex` and `.newline` it changes these name as well
+  so the CSS won't apply to the html generated from the .md file
+*/
+
+.content *[class=katex] *[class=katex-html] {
+  line-height: 3.25;
+  font-size: 19px;
+}
+
+.content *[class=katex] *[class=katex-html]> *[class=newline] {
+  height: 1em; /* weird this doesn't seem to select the newline ¯\_(ツ)_/¯*/
+}
+
+.content *[class=footnotes]{
+  font-size: 15px;
+}
+
+.content *[class=footnotes] li{
+  margin-bottom: 1.5em;
+}
+
+.content *[class=footnotes] li p {
+  display: inline;
+}
+
 /* Code blocks */
 .content pre[class*="language-"] {
   margin: 2.5em 0;
   border: 1px solid #697b82;
 }
-
+  
 /* Inline code */
 .content :not(pre) > code[class*="language-"] {
   padding: 0.2em 0.3em;
-}
-
-.content .footnotes{
-  font-size: 15px;
-}
-
-.content .footnotes li{
-  margin-bottom: 1em;
-}
-
-.content .footnotes li p {
-  margin-bottom: 0;
 }

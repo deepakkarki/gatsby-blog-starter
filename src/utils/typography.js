@@ -36,12 +36,14 @@ parnassusTheme.overrideThemeStyles = ({adjustFontSizeTo, rhythm}, options, style
       position: "relative",
     },
     blockquote: {
-        ...adjustFontSizeTo('17px'),
+        ...adjustFontSizeTo('16px'),
         fontStyle: 'italic',
         borderColor: 'none',
-        borderLeft: `${rhythm(3/16)} solid #335`,
+        borderLeft: `${rhythm(3/16)} solid darkblue`,
         paddingTop: '0.5em',
         paddingBottom: '0.5em',
+        background: "#f5f5ff",
+        paddingRight: ".75em",
     },
     'blockquote > :last-child': {
         marginBottom: 0,

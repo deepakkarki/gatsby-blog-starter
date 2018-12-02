@@ -13,8 +13,6 @@ categories: ["frontend", "software-architecture", "javascript"]
 
 This is a source code walkthrough of Bubbly-bg - a tiny js library to get beautiful animated bubbly backgrounds for your webpages.
 
-# What 
-
 [Bubbly-bg](https://github.com/tipsy/bubbly-bg/) is a small independent library written in vanilla javascript that helps you add an animated “bubbly background”  to your HTML webpages. A live demo can be found here https://tipsy.github.io/bubbly-bg/
 
 
@@ -55,12 +53,12 @@ bubbly({
 </iframe>
 
 
-# Why
+## Why
 
 Animated backgrounds can give wonderful visual effects, but repeating yourself and taking care of edge cases can be quite an hassle. Hence the need for something like `bubbly-bg.js`  - a configurable, lightweight, dependency free JS library!
 
 
-# How it works
+## How it works
 
 Behind the scenes when `bubbly()`  is called it attaches a [\<canvas/>](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)  element to the body. This canvas element covers the whole webpage. It has
 

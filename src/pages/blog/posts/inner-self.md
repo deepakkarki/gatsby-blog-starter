@@ -25,7 +25,7 @@ InnerSelf is inspired by [React](https://reactjs.org/) and [Redux](https://redux
 It does all of this by serializing your component tree to a string and assigning it to `innerHTML` of a root element. It even imitates Virtual DOM diffing by comparing last known output of components with the new one!
 
 
-# Usage
+## Usage
 
 Defining a component works as follows,
 
@@ -114,7 +114,7 @@ Check out the live [codepen below](https://codepen.io/Cweili/pen/ZXOeQa)!
 </iframe>
 
 
-# Working
+## Working
 
 Here is a high level overview of how everything works together
 
@@ -134,12 +134,12 @@ Note that this is the user workflow once the App is attached to a DOM node and a
 Note the performance drawbacks as unlike React which does an careful DOM diffing, InnerSelf just rewrites the whole DOM (which it is attached to).
 
 
-# Internals
+## Internals
 
 All the core code resides in just one `index.js` file, just over 50 lines of code including comments. Talk about minimal!
 
 
-## Rendering
+### Rendering
 
 The first part is the main rendering part, (If you’re not familiar with tagged template literals, I strongly suggest reading about it on the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).)
 
@@ -185,7 +185,7 @@ The `html()` takes in all the expression values, interleaves it with the string 
 Then filter out any falsey value, and then concatenate them into a string.
 
 
-## State Management
+### State Management
 
 The second part and last part, handled by `createStore()`
 

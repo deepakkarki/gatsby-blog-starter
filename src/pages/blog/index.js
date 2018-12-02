@@ -42,6 +42,7 @@ articles under each category + have good descriptions. But it won't be easy.
 export default ({ data }) => {
   let postNodes = data.allPosts.edges.map( edge => edge.node )
   let js30Nodes = data.js30.edges.map( edge => edge.node )
+  let twoBitNodes = data.twoBit.edges.map( edge => edge.node )
   /* 
   Keep this for later, as of now I don't know a good way to present categories
   Maybe have a bunch of categories with atleast > 6 posts? OR
@@ -74,6 +75,10 @@ export default ({ data }) => {
         <h2 className={styles.subTitle}>JS30 Series</h2>
         <PostGrid posts={js30Nodes}/>
         <h3 className={styles.seeMore}><Link to="/blog/series/js30">See all posts in this series &rarr;</Link></h3>
+
+        <h2 className={styles.subTitle}>Two Bit History</h2>
+        <PostGrid posts={twoBitNodes}/>
+        <h3 className={styles.seeMore}><Link to="/blog/series/2bithistory">See all posts in this series &rarr;</Link></h3>
 
         {/* Maybe have categories if there are more than 6 posts in a given category? */}
         {/* <h2 className={styles.subTitle}>Categories</h2>
@@ -150,7 +155,35 @@ export const query = graphql`
           date(formatString: "DD MMMM, YYYY")
           categories
         }
-        excerpt
+      }
+    }
+  }
+
+  twoBit: allMarkdownRemark(
+    filter: {
+      fileAbsolutePath: {
+        regex: "/src/pages/blog/series/2bithistory//"
+      }
+      frontmatter:{
+        published: {eq : true}
+        type: {ne: "page"}
+      }
+    }
+    sort: { fields: [frontmatter___date], order: DESC }
+    limit: 6
+  ){
+    edges{
+      node{
+        id
+        fields{
+          slug
+        }
+        frontmatter {
+          title
+          desc
+          date(formatString: "DD MMMM, YYYY")
+          categories
+        }
       }
     }
   }
@@ -185,7 +218,6 @@ export const query = graphql`
               desc
               categories
             }
-            excerpt
           }
         }
      }

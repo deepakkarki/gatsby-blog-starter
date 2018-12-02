@@ -34,7 +34,7 @@ export const IndexQuery = graphql`
 {
   allLinksJson(
     sort:{fields:date, order: DESC}
-    limit:5
+    limit:15
   ) {
     edges {
       node {

@@ -19,7 +19,8 @@ export default ({ data }) => {
   let seriesNameMap = {
     // fragmentName : [name, url]
     "js30" : ["JS 30", "js30"], 
-    "twoBit" : ["Two Bit History", "2bithistory"]
+    "twoBit" : ["Two Bit History", "2bithistory"],
+    "wpBook" : ["The Story of WordPress", "wpbook"]
   }
   return (
     <Layout>
@@ -75,7 +76,7 @@ export const js30Fragment = graphql`
         fileAbsolutePath: {regex: "/src/pages/blog/series/js30//"}
         frontmatter:{published: {eq : true}, type: {ne: "page"}}
       }
-      sort: { fields: [frontmatter___part], order: DESC }, limit: 6
+      sort: { fields: [frontmatter___part], order: DESC }, limit: 4
       ){
         ...seriesIndex
       }
@@ -89,7 +90,21 @@ export const twoBitFragment = graphql`
         fileAbsolutePath: {regex: "/src/pages/blog/series/2bithistory//"}
         frontmatter:{published: {eq : true}, type: {ne: "page"}}
       }
-      sort: { fields: [frontmatter___date], order: DESC }, limit: 6
+      sort: { fields: [frontmatter___date], order: DESC }, limit: 4
+      ){
+        ...seriesIndex
+      }
+  }
+`
+
+export const wpBookFragment = graphql`
+  fragment wpBook on Query {
+    wpBook: allMarkdownRemark(
+      filter: {
+        fileAbsolutePath: {regex: "/src/pages/blog/series/wpbook//"}
+        frontmatter:{published: {eq : true}, type: {ne: "page"}}
+      }
+      sort: { fields: [frontmatter___date], order: DESC }, limit: 4
       ){
         ...seriesIndex
       }
@@ -100,5 +115,6 @@ export const categoryListQuery = graphql`
 query {
   ...js30
   ...twoBit
+  ...wpBook
 }
 `

@@ -10,7 +10,7 @@ date: 2018-12-05
 part: 5
 ---
 
-You are reading the fifth part of the series, find the whole series at [series/wpbook](/blog/series/wpbook).
+You are reading the fifth part of the series, find the whole series at <i-link to="/blog/series/wpbook">series/wpbook</i-link>.
 
 ## 30. Riding the Crazyhorse
 

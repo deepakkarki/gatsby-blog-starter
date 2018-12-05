@@ -10,7 +10,7 @@ date: 2018-12-06
 part: 6
 ---
 
-You are reading the sixth part of the series, find the whole series at [series/wpbook](/blog/series/wpbook).
+You are reading the sixth part of the series, find the whole series at <i-link to="/blog/series/wpbook">series/wpbook</i-link>.
 
 ## 40. The Transition to Release Leads
 

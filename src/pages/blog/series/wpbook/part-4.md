@@ -10,7 +10,7 @@ date: 2018-12-04
 part: 4
 ---
 
-You are reading the fourth part of the series, find the whole series at [series/wpbook](/blog/series/wpbook).
+You are reading the fourth part of the series, find the whole series at <i-link to="/blog/series/wpbook">series/wpbook</i-link>.
 
 ## 25. Creating a Folksonomy
 

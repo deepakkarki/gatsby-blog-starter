@@ -6,7 +6,7 @@ desc: >
 author:
   name: "Wordpress Team"
 published: true
-date: 2018-12-06
+date: 2018-11-06
 part: 6
 ---
 

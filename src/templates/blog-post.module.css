@@ -23,6 +23,19 @@
 .content h2{
   border-bottom: 1px solid #808080c7;
   padding-bottom: 0.4em;
+  font-size: 2rem;
+}
+.content h3{
+  font-size: 1.8rem;
+}
+.content h4{
+  font-size: 1.5rem;
+}
+.content h5{
+  font-size: 1.3rem;
+}
+.content h6{
+  font-size: 1rem;
 }
 
 .content div > p{
